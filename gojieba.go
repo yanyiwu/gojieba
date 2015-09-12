@@ -1,6 +1,7 @@
 package gojieba
 
 /*
+#cgo CXXFLAGS: -DLOGGER_LEVEL=LL_WARN -O3 -Wall
 #include "cjieba.h"
 #include <stdlib.h>
 */
