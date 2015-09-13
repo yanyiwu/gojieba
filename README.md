@@ -1,4 +1,4 @@
-# GoJieba
+# GoJieba [![Build Status](https://travis-ci.org/yanyiwu/gojieba.png?branch=master)](https://travis-ci.org/yanyiwu/gojieba)
 
 GoJieba 是 Jieba 分词的 Go 语言版本分词库。
 
