@@ -10,7 +10,7 @@ static char** ConvertWords(const std::vector<std::string>& words) {
     res[i] = (char*)malloc(sizeof(char) * (words[i].length() + 1));
     strcpy(res[i], words[i].c_str());
   }
-  res[words.size()] = '\0';
+  res[words.size()] = NULL;
   return res;
 }
 
