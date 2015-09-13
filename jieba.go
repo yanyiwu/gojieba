@@ -32,7 +32,7 @@ func (x Jieba) Cut(s string, hmm bool) []string {
 	return res
 }
 
-func (x Jieba) CutAll(s string, hmm bool) []string {
+func (x Jieba) CutAll(s string) []string {
 	var words **C.char = C.CutAll(x.jieba, C.CString(s))
 	res := cstrings(words)
 	C.FreeWords(words)
