@@ -10,9 +10,10 @@ func TestJieba(t *testing.T) {
 	defer x.Free()
 
 	expected := []string{"南京市", "长江大桥"}
-	if reflect.DeepEqual(expected, x.Cut("南京市长江大桥", false)) {
+	actual := x.Cut("南京市长江大桥", false)
+	if reflect.DeepEqual(expected, actual) {
 		t.Log("ok")
 	} else {
-		t.Error("failed.")
+		t.Error(actual)
 	}
 }

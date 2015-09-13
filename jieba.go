@@ -31,3 +31,21 @@ func (x Jieba) Cut(s string, hmm bool) []string {
 	C.FreeWords(words)
 	return res
 }
+
+func (x Jieba) CutAll(s string, hmm bool) []string {
+	var words **C.char = C.CutAll(x.jieba, C.CString(s))
+	res := cstrings(words)
+	C.FreeWords(words)
+	return res
+}
+
+func (x Jieba) CutForSearch(s string, hmm bool) []string {
+	c_int_hmm := 0
+	if hmm {
+		c_int_hmm = 1
+	}
+	var words **C.char = C.CutForSearch(x.jieba, C.CString(s), C.int(c_int_hmm))
+	res := cstrings(words)
+	C.FreeWords(words)
+	return res
+}

@@ -25,7 +25,7 @@ void FreeJieba(Jieba x) {
 
 char** Cut(Jieba x, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
-  ((CppJieba::Jieba*)x)->Cut(sentence, is_hmm_used, words);
+  ((CppJieba::Jieba*)x)->Cut(sentence, words, is_hmm_used);
   char** res = ConvertWords(words);
   return res;
 }
@@ -37,9 +37,9 @@ char** CutAll(Jieba x, const char* sentence) {
   return res;
 }
 
-char** CutForSearch(Jieba x, const char* sentence) {
+char** CutForSearch(Jieba x, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
-  ((CppJieba::Jieba*)x)->CutForSearch(sentence, words);
+  ((CppJieba::Jieba*)x)->CutForSearch(sentence, words, is_hmm_used);
   char** res = ConvertWords(words);
   return res;
 }
