@@ -4,7 +4,7 @@
 [![GoDoc](https://godoc.org/github.com/yanyiwu/gojieba?status.svg)](https://godoc.org/github.com/yanyiwu/gojieba)
 [![Coverage Status](https://coveralls.io/repos/yanyiwu/gojieba/badge.svg?branch=master&service=github)](https://coveralls.io/github/yanyiwu/gojieba?branch=master)
 
-GoJieba 是 Jieba 分词的 Go 语言版本分词库。
+[GoJieba]是"结巴"中文分词的Go语言版本。
 
 ## 用法
 
@@ -47,3 +47,4 @@ i@yanyiwu.com
 [CppJieba]:http://github.com/yanyiwu/cppjieba
 [GoJieba]:http://github.com/yanyiwu/gojieba
 [jieba-performance-comparison]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
+[Jieba]:https://github.com/fxsjy/jieba
