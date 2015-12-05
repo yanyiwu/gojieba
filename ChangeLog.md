@@ -3,6 +3,7 @@
 ## next version
 
 1. 升级 [cppjieba] to v4.1.2  
+2. 增加英文介绍 `README_EN.md`
 
 ## 0.9.0
 

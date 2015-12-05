@@ -1,27 +1,25 @@
-# GoJieba [English](README_EN.md)
+# GoJieba [简体中文](README.md)
 
 [![Build Status](https://travis-ci.org/yanyiwu/gojieba.png?branch=master)](https://travis-ci.org/yanyiwu/gojieba) 
 [![GoDoc](https://godoc.org/github.com/yanyiwu/gojieba?status.svg)](https://godoc.org/github.com/yanyiwu/gojieba)
 [![Coverage Status](https://coveralls.io/repos/yanyiwu/gojieba/badge.svg?branch=master&service=github)](https://coveralls.io/github/yanyiwu/gojieba?branch=master)
 
-[GoJieba]是"结巴"中文分词的Go语言版本。
+[GoJieba] is a Jieba Chinese Word Segmentation lib written by Go。
 
-## 用法
+## Usage
 
 ```
 go get github.com/yanyiwu/gojieba
 ```
 
-示例代码请见 example/demo.go
+See example in [example/demo.go](example/demo.go)
 
 ```
 cd example
 go run demo.go
 ```
 
-之所以需要先 cd 到 example 目录下，是因为 demo.go 里面有写死的字典相对路径。
-
-输出结果：
+Output Result：
 
 ```
 全模式: 我/来到/北京/清华/清华大学/华大/大学
@@ -30,15 +28,15 @@ go run demo.go
 搜索引擎模式: 小明/硕士/毕业/于/中国/中国科学院/科学/科学院/学院/计算所/，/后/在/日本/日本京都大学/京都/京都大学/大学/深造
 ```
 
-## 性能测试
+## Performance
 
-性能不错，因为 [GoJieba] 本身就是封装了 C++ 版本的 [CppJieba] 而成，
-对比测试了一下，耗时大概是 [CppJieba] 的 1.2 倍。
-鉴于 [CppJieba] 性能还不错(详见[jieba-performance-comparison])，
-所以 [GoJieba] 性能还是可以的，
-对于讲究性能的地方还是可以试试的。
+[GoJieba] has a good enough performance,
+it maybe is the best of all the Chinese Word Segmentation lib  from the angle of high performance.
 
-## 客服
+Please see more details in [jieba-performance-comparison],
+but the article is written by Chinese, Maybe someday it will be transferred to English.
+
+## Contact
 
 ```
 i@yanyiwu.com
@@ -48,3 +46,4 @@ i@yanyiwu.com
 [GoJieba]:http://github.com/yanyiwu/gojieba
 [jieba-performance-comparison]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
 [Jieba]:https://github.com/fxsjy/jieba
+
