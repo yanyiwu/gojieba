@@ -3,7 +3,7 @@
 
 #include "MPSegment.hpp"
 
-namespace CppJieba {
+namespace cppjieba {
 
 class LevelSegment: public SegmentBase{
  public:
@@ -18,14 +18,14 @@ class LevelSegment: public SegmentBase{
   ~LevelSegment() {
   }
 
-  void cut(Unicode::const_iterator begin,
+  void Cut(Unicode::const_iterator begin,
         Unicode::const_iterator end, 
         vector<pair<Unicode, size_t> >& res) const {
     res.clear();
     vector<Unicode> words;
     vector<Unicode> smallerWords;
     words.reserve(end - begin);
-    mpSeg_.cut(begin, end, words);
+    mpSeg_.Cut(begin, end, words);
     smallerWords.reserve(words.size());
     res.reserve(words.size());
 
@@ -35,7 +35,7 @@ class LevelSegment: public SegmentBase{
       for (size_t i = 0; i < words.size(); i++) {
         if (words[i].size() >= 3) {
           size_t len = words[i].size() - 1;
-          mpSeg_.cut(words[i].begin(), words[i].end(), smallerWords, len); // buffer.push_back without clear 
+          mpSeg_.Cut(words[i].begin(), words[i].end(), smallerWords, len); // buffer.push_back without clear 
         }
         if (words[i].size() > 1) {
           res.push_back(pair<Unicode, size_t>(words[i], level));
@@ -47,24 +47,24 @@ class LevelSegment: public SegmentBase{
     }
   }
 
-  void cut(const string& sentence, 
+  void Cut(const string& sentence, 
         vector<pair<string, size_t> >& words) const {
     words.clear();
     Unicode unicode;
-    TransCode::decode(sentence, unicode);
+    TransCode::Decode(sentence, unicode);
     vector<pair<Unicode, size_t> > unicodeWords;
-    cut(unicode.begin(), unicode.end(), unicodeWords);
+    Cut(unicode.begin(), unicode.end(), unicodeWords);
     words.resize(unicodeWords.size());
     for (size_t i = 0; i < words.size(); i++) {
-      TransCode::encode(unicodeWords[i].first, words[i].first);
+      TransCode::Encode(unicodeWords[i].first, words[i].first);
       words[i].second = unicodeWords[i].second;
     }
   }
 
-  bool cut(const string& sentence, 
+  bool Cut(const string& sentence, 
         vector<string>& res) const {
     vector<pair<string, size_t> > words;
-    cut(sentence, words);
+    Cut(sentence, words);
     res.clear();
     res.reserve(words.size());
     for (size_t i = 0; i < words.size(); i++) {
@@ -77,6 +77,6 @@ class LevelSegment: public SegmentBase{
   MPSegment mpSeg_;
 }; // class LevelSegment
 
-} // namespace CppJieba
+} // namespace cppjieba
 
 #endif // CPPJIEBA_LEVELSEGMENT_H

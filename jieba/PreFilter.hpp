@@ -3,7 +3,7 @@
 
 #include "TransCode.hpp"
 
-namespace CppJieba {
+namespace cppjieba {
 
 //class PreFilterIterator {
 // public:
@@ -26,7 +26,7 @@ class PreFilter {
   PreFilter(const unordered_set<Rune>& symbols, 
         const string& sentence)
     : symbols_(symbols) {
-    TransCode::decode(sentence, sentence_);
+    TransCode::Decode(sentence, sentence_);
     cursor_ = sentence_.begin();
   }
   ~PreFilter() {
@@ -56,6 +56,6 @@ class PreFilter {
   const unordered_set<Rune>& symbols_;
 }; // class PreFilter
 
-} // namespace CppJieba
+} // namespace cppjieba
 
 #endif // CPPJIEBA_PRE_FILTER_H

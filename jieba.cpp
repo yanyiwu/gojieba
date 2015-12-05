@@ -15,31 +15,31 @@ static char** ConvertWords(const std::vector<std::string>& words) {
 }
 
 Jieba NewJieba(const char* dict_path, const char* hmm_path, const char* user_dict) {
-  Jieba x = (Jieba)(new CppJieba::Jieba(dict_path, hmm_path, user_dict));
+  Jieba x = (Jieba)(new cppjieba::Jieba(dict_path, hmm_path, user_dict));
   return x;
 }
 
 void FreeJieba(Jieba x) {
-  delete (CppJieba::Jieba*)x;
+  delete (cppjieba::Jieba*)x;
 }
 
 char** Cut(Jieba x, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
-  ((CppJieba::Jieba*)x)->Cut(sentence, words, is_hmm_used);
+  ((cppjieba::Jieba*)x)->Cut(sentence, words, is_hmm_used);
   char** res = ConvertWords(words);
   return res;
 }
 
 char** CutAll(Jieba x, const char* sentence) {
   std::vector<std::string> words;
-  ((CppJieba::Jieba*)x)->CutAll(sentence, words);
+  ((cppjieba::Jieba*)x)->CutAll(sentence, words);
   char** res = ConvertWords(words);
   return res;
 }
 
 char** CutForSearch(Jieba x, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
-  ((CppJieba::Jieba*)x)->CutForSearch(sentence, words, is_hmm_used);
+  ((cppjieba::Jieba*)x)->CutForSearch(sentence, words, is_hmm_used);
   char** res = ConvertWords(words);
   return res;
 }

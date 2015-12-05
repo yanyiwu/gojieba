@@ -9,7 +9,7 @@
 #include "SegmentBase.hpp"
 #include "TransCode.hpp"
 
-namespace CppJieba {
+namespace cppjieba {
 class FullSegment: public SegmentBase {
  public:
   FullSegment(const string& dictPath) {
@@ -22,11 +22,11 @@ class FullSegment: public SegmentBase {
     assert(dictTrie_);
   }
   ~FullSegment() {
-    if(isNeedDestroy_) {
+    if (isNeedDestroy_) {
       delete dictTrie_;
     }
   }
-  void cut(const string& sentence, 
+  void Cut(const string& sentence, 
         vector<string>& words) const {
     PreFilter pre_filter(symbols_, sentence);
     PreFilter::Range range;
@@ -34,11 +34,11 @@ class FullSegment: public SegmentBase {
     uwords.reserve(sentence.size());
     while (pre_filter.HasNext()) {
       range = pre_filter.Next();
-      cut(range.begin, range.end, uwords);
+      Cut(range.begin, range.end, uwords);
     }
-    TransCode::encode(uwords, words);
+    TransCode::Encode(uwords, words);
   }
-  void cut(Unicode::const_iterator begin, 
+  void Cut(Unicode::const_iterator begin, 
         Unicode::const_iterator end, 
         vector<Unicode>& res) const {
     //resut of searching in trie tree
@@ -54,7 +54,7 @@ class FullSegment: public SegmentBase {
     int wordLen = 0;
     assert(dictTrie_);
     vector<struct Dag> dags;
-    dictTrie_->find(begin, end, dags);
+    dictTrie_->Find(begin, end, dags);
     for (size_t i = 0; i < dags.size(); i++) {
       for (size_t j = 0; j < dags[i].nexts.size(); j++) {
         const DictUnit* du = dags[i].nexts[j].second;
