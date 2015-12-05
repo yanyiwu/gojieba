@@ -1,11 +1,11 @@
 # ChangeLog
 
-## next version
+## v0.9.1
 
 1. 升级 [cppjieba] to v4.1.2  
 2. 增加英文介绍 `README_EN.md`
 
-## 0.9.0
+## v0.9.0
 
 1. 完成基本分词功能：【全模式，精确模式，搜索引擎模式】
 
