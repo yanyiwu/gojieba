@@ -1,6 +1,6 @@
 # ChangeLog
 
-## next version
+## v0.9.3
 
 1. 修复多余日志输出的问题。
 
