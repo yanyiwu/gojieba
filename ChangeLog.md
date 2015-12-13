@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
+1. 修复多余日志输出的问题。
+
 ## v0.9.2
 
 1. 升级 [cppjieba] to v4.2.1  
