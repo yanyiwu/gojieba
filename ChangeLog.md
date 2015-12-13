@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v0.9.2
+
+1. 升级 [cppjieba] to v4.2.1  
+
 ## v0.9.1
 
 1. 升级 [cppjieba] to v4.1.2  
