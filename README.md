@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/yanyiwu/gojieba.png?branch=master)](https://travis-ci.org/yanyiwu/gojieba) 
 [![Author](https://img.shields.io/badge/author-@yanyiwu-blue.svg?style=flat)](http://yanyiwu.com/) 
+[![Performance](https://img.shields.io/badge/performance-excellent-brightgreen.svg?style=flat)](http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html) 
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://yanyiwu.mit-license.org)
 [![GoDoc](https://godoc.org/github.com/yanyiwu/gojieba?status.svg)](https://godoc.org/github.com/yanyiwu/gojieba)
 [![Coverage Status](https://coveralls.io/repos/yanyiwu/gojieba/badge.svg?branch=master&service=github)](https://coveralls.io/github/yanyiwu/gojieba?branch=master)
@@ -37,7 +38,7 @@ go run demo.go
 性能不错，因为 [GoJieba] 本身就是封装了 C++ 版本的 [CppJieba] 而成，
 对比测试了一下，耗时大概是 [CppJieba] 的 1.2 倍。
 鉴于 [CppJieba] 性能还不错(详见[jieba-performance-comparison])，
-所以 [GoJieba] 性能还是可以的，
+所以 [GoJieba] 性能是非常不错的，
 对于讲究性能的地方还是可以试试的。
 
 ## 客服
