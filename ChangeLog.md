@@ -1,5 +1,10 @@
 # ChangeLog
 
+## next version
+
+1. 源码布局变动，增加 deps/ 管理外部依赖代码。
+2. 增加 Extractor 关键词抽取功能。
+
 ## v0.9.3
 
 1. 修复多余日志输出的问题。

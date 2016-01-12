@@ -2,7 +2,7 @@ extern "C" {
     #include "jieba.h"
 }
 
-#include "jieba/Jieba.hpp"
+#include "cppjieba/Jieba.hpp"
 
 static char** ConvertWords(const std::vector<std::string>& words) {
   char ** res = (char**)malloc(sizeof(char*) * (words.size() + 1));
@@ -15,8 +15,7 @@ static char** ConvertWords(const std::vector<std::string>& words) {
 }
 
 Jieba NewJieba(const char* dict_path, const char* hmm_path, const char* user_dict) {
-  Jieba x = (Jieba)(new cppjieba::Jieba(dict_path, hmm_path, user_dict));
-  return x;
+  return (Jieba)(new cppjieba::Jieba(dict_path, hmm_path, user_dict));
 }
 
 void FreeJieba(Jieba x) {

@@ -5,3 +5,4 @@ tags
 *.d
 *.ut
 build
+example/example

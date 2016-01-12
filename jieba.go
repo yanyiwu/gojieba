@@ -1,7 +1,7 @@
 package gojieba
 
 /*
-#cgo CXXFLAGS: -DLOGGING_LEVEL=WARNING -O3 -Wall
+#cgo CXXFLAGS: -I./deps -DLOGGING_LEVEL=WARNING -O3 -Wall
 #include <stdlib.h>
 #include "jieba.h"
 */
