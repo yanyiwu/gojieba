@@ -43,12 +43,3 @@ char** CutForSearch(Jieba x, const char* sentence, int is_hmm_used) {
   return res;
 }
 
-void FreeWords(char** words) {
-  char** x = words;
-  while (x && *x) {
-    free(*x);
-    *x = NULL;
-    x ++;
-  }
-  free(words);
-}
