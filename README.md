@@ -27,27 +27,27 @@ go run demo.go
 输出结果：
 
 ```
+DemoJieba
 全模式: 我/来到/北京/清华/清华大学/华大/大学
 精确模式: 我/来到/北京/清华大学
 新词识别: 他/来到/了/网易/杭研/大厦
 搜索引擎模式: 小明/硕士/毕业/于/中国/中国科学院/科学/科学院/学院/计算所/，/后/在/日本/日本京都大学/京都/京都大学/大学/深造
+DemoExtract
+我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。
+关键词抽取: CEO/升职/加薪/手扶拖拉机/巅峰
 ```
 
 ## 性能测试
 
-性能不错，因为 [GoJieba] 本身就是封装了 C++ 版本的 [CppJieba] 而成，
-对比测试了一下，耗时大概是 [CppJieba] 的 1.2 倍。
-鉴于 [CppJieba] 性能还不错(详见[jieba-performance-comparison])，
-所以 [GoJieba] 性能是非常不错的，
-对于讲究性能的地方还是可以试试的。
+[Jieba中文分词系列性能评测]
 
 ## 客服
 
-```
-i@yanyiwu.com
-```
++ Email: `i@yanyiwu.com`
++ QQ: 64162451
++ WeChat: ![image](http://7viirv.com1.z0.glb.clouddn.com/5a7d1b5c0d_yanyiwu_personal_qrcodes.jpg)
 
 [CppJieba]:http://github.com/yanyiwu/cppjieba
 [GoJieba]:http://github.com/yanyiwu/gojieba
-[jieba-performance-comparison]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
 [Jieba]:https://github.com/fxsjy/jieba
+[Jieba中文分词系列性能评测]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
