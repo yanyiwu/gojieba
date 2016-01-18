@@ -6,6 +6,8 @@
 2. 增加 Extractor 关键词抽取功能。
 3. Upgrade [limonp] to version v0.5.1
 4. Upgrade [cppjieba] to version v4.3.1
+5. 分词接口变动 New -> NewJieba
+6. 增加关键词抽取类 NewExtractor
 
 ## v0.9.3
 

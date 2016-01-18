@@ -1,11 +1,11 @@
 #ifndef CJIEBA_EXTRACTOR_H
 #define CJIEBA_EXTRACTOR_H
 
-#include "jieba.h"
+#include "util.h"
 
 typedef void* Extractor;
 
-Extractor NewExtractor(const Jieba handle, const char* idf_path, const char* stop_word_path);
+Extractor NewExtractor(const char* dict_path, const char* hmm_path, const char* user_dict, const char* idf_path, const char* stop_word_path);
 void FreeExtractor(Extractor);
 
 char** Extract(Extractor handle, const char* sentence, int top_k);

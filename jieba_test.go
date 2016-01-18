@@ -6,7 +6,7 @@ import (
 )
 
 func TestJieba(t *testing.T) {
-	x := New("./dict/jieba.dict.utf8", "./dict/hmm_model.utf8", "./dict/user.dict.utf8")
+	x := NewJieba("./dict/jieba.dict.utf8", "./dict/hmm_model.utf8", "./dict/user.dict.utf8")
 	defer x.Free()
 	var s string
 	var expected string

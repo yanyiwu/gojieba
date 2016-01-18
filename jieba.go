@@ -11,17 +11,17 @@ type Jieba struct {
 	jieba C.Jieba
 }
 
-func New(dict_path, hmm_path, user_dict_path string) Jieba {
-	var x Jieba
-	x.jieba = C.NewJieba(C.CString(dict_path), C.CString(hmm_path), C.CString(user_dict_path))
-	return x
+func NewJieba(dict_path, hmm_path, user_dict_path string) *Jieba {
+	return &Jieba{
+		C.NewJieba(C.CString(dict_path), C.CString(hmm_path), C.CString(user_dict_path)),
+	}
 }
 
-func (x Jieba) Free() {
+func (x *Jieba) Free() {
 	C.FreeJieba(x.jieba)
 }
 
-func (x Jieba) Cut(s string, hmm bool) []string {
+func (x *Jieba) Cut(s string, hmm bool) []string {
 	c_int_hmm := 0
 	if hmm {
 		c_int_hmm = 1
@@ -32,14 +32,14 @@ func (x Jieba) Cut(s string, hmm bool) []string {
 	return res
 }
 
-func (x Jieba) CutAll(s string) []string {
+func (x *Jieba) CutAll(s string) []string {
 	var words **C.char = C.CutAll(x.jieba, C.CString(s))
 	res := cstrings(words)
 	C.FreeWords(words)
 	return res
 }
 
-func (x Jieba) CutForSearch(s string, hmm bool) []string {
+func (x *Jieba) CutForSearch(s string, hmm bool) []string {
 	c_int_hmm := 0
 	if hmm {
 		c_int_hmm = 1
