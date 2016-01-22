@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
+1. Upgrade [limonp] to version v0.5.3, fix incompatibility problem in Windows.
+
 ## v0.10.0
 
 1. 源码布局变动，增加 deps/ 管理外部依赖代码。
