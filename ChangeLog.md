@@ -2,7 +2,9 @@
 
 ## next version
 
-1. Upgrade [limonp] to version v0.5.3, fix incompatibility problem in Windows.
+Upgrade:
+
++ cppjieba -> v4.4.1 to fix bug, see details in [CppJieba ChangeLog v4.4.1](https://github.com/yanyiwu/cppjieba/blob/master/ChangeLog.md#v441)
 
 ## v0.10.0
 
