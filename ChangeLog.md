@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
+1. Fix error in `go vet` 
+
 ## v0.10.1
 
 Upgrade:
