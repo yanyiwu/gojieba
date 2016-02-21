@@ -7,7 +7,12 @@
 [![GoDoc](https://godoc.org/github.com/yanyiwu/gojieba?status.svg)](https://godoc.org/github.com/yanyiwu/gojieba)
 [![Coverage Status](https://coveralls.io/repos/yanyiwu/gojieba/badge.svg?branch=master&service=github)](https://coveralls.io/github/yanyiwu/gojieba?branch=master)
 
-[GoJieba]是"结巴"中文分词的Go语言版本。
+[GoJieba]是"结巴"中文分词的Golang语言版本。
+
+## 简介
+
++ 支持多种分词方式，包括最大概率模式，HMM新词发现模式，搜索引擎模式，全模式等。
++ 核心算法底层由C++实现，性能高效。
 
 ## 用法
 
@@ -15,7 +20,7 @@
 go get github.com/yanyiwu/gojieba
 ```
 
-示例代码请见 example/demo.go
+示例代码请见 [example/demo.go](example/demo.go)
 
 ```
 cd example
