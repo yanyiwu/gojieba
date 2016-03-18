@@ -1,5 +1,12 @@
 # ChangeLog
 
+## next version
+
+Upgrade to fix potential trouble:
+
++ limonp -> v0.5.6
++ cppjieba -> v4.5.2
+
 ## v0.10.2
 
 1. Fix error in `go vet` 
