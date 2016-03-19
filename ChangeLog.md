@@ -4,8 +4,8 @@
 
 Upgrade to fix potential trouble:
 
-+ limonp -> v0.5.6
-+ cppjieba -> v4.5.2
++ limonp -> v0.6.0
++ cppjieba -> v4.5.3
 
 ## v0.10.2
 
