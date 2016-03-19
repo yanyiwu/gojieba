@@ -1,6 +1,6 @@
 # ChangeLog
 
-## next version
+## v0.10.3
 
 Upgrade to fix potential trouble:
 
