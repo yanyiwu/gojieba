@@ -47,4 +47,11 @@ func TestJieba(t *testing.T) {
 	if expected != actual {
 		t.Error(actual)
 	}
+
+	s = "长春市长春药店"
+	expected = "长春市/ns,长春/ns,药店/n"
+	actual = strings.Join(x.Tag(s), ",")
+	if expected != actual {
+		t.Error(actual)
+	}
 }

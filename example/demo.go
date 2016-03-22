@@ -33,6 +33,9 @@ func DemoJieba() {
 
 	words = x.CutForSearch("小明硕士毕业于中国科学院计算所，后在日本京都大学深造", use_hmm)
 	fmt.Println("搜索引擎模式:", strings.Join(words, "/"))
+
+	words = x.Tag("长春市长春药店")
+	fmt.Println("词性标注:", strings.Join(words, ","))
 }
 
 func DemoExtract() {
