@@ -1,6 +1,6 @@
 # ChangeLog
 
-## next version
+## v0.11.0
 
 + Expose new api: Tag
 
