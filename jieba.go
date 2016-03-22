@@ -27,15 +27,15 @@ func (x *Jieba) Cut(s string, hmm bool) []string {
 		c_int_hmm = 1
 	}
 	var words **C.char = C.Cut(x.jieba, C.CString(s), C.int(c_int_hmm))
+	defer C.FreeWords(words)
 	res := cstrings(words)
-	C.FreeWords(words)
 	return res
 }
 
 func (x *Jieba) CutAll(s string) []string {
 	var words **C.char = C.CutAll(x.jieba, C.CString(s))
+	defer C.FreeWords(words)
 	res := cstrings(words)
-	C.FreeWords(words)
 	return res
 }
 
@@ -45,7 +45,14 @@ func (x *Jieba) CutForSearch(s string, hmm bool) []string {
 		c_int_hmm = 1
 	}
 	var words **C.char = C.CutForSearch(x.jieba, C.CString(s), C.int(c_int_hmm))
+	defer C.FreeWords(words)
 	res := cstrings(words)
-	C.FreeWords(words)
+	return res
+}
+
+func (x *Jieba) Tag(s string) []string {
+	var words **C.char = C.Tag(x.jieba, C.CString(s))
+	defer C.FreeWords(words)
+	res := cstrings(words)
 	return res
 }

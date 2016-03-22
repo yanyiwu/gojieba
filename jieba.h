@@ -11,5 +11,6 @@ void FreeJieba(Jieba);
 char** Cut(Jieba handle, const char* sentence, int is_hmm_used);
 char** CutAll(Jieba handle, const char* sentence);
 char** CutForSearch(Jieba handle, const char* sentence, int is_hmm_used);
+char** Tag(Jieba handle, const char* sentence);
 
 #endif // CJIEBA_JIEBA_H

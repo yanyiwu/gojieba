@@ -43,3 +43,13 @@ char** CutForSearch(Jieba x, const char* sentence, int is_hmm_used) {
   return res;
 }
 
+char** Tag(Jieba x, const char* sentence) {
+  std::vector<std::pair<std::string, std::string> > result;
+  ((cppjieba::Jieba*)x)->Tag(sentence, result);
+  std::vector<std::string> words;
+  words.reserve(result.size());
+  for (size_t i = 0; i < result.size(); ++i) {
+    words.push_back(result[i].first + "/" + result[i].second);
+  }
+  return ConvertWords(words);
+}
