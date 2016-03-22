@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
++ Expose new api: Tag
+
 ## v0.10.3
 
 Upgrade to fix potential trouble:
