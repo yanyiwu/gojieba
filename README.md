@@ -7,7 +7,7 @@
 [![GoDoc](https://godoc.org/github.com/yanyiwu/gojieba?status.svg)](https://godoc.org/github.com/yanyiwu/gojieba)
 [![Coverage Status](https://coveralls.io/repos/yanyiwu/gojieba/badge.svg?branch=master&service=github)](https://coveralls.io/github/yanyiwu/gojieba?branch=master)
 
-[![logo](http://7viirv.com1.z0.glb.clouddn.com/gojieba.jpg)](http://yanyiwu.com/work/2015/09/14/c-cpp-go-mix-programming.html)
+[![logo](http://7viirv.com1.z0.glb.clouddn.com/gojieba-logo.jpg)](http://yanyiwu.com/work/2015/09/14/c-cpp-go-mix-programming.html)
 
 [GoJieba]是"结巴"中文分词的Golang语言版本。
 
