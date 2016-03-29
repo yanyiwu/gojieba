@@ -59,3 +59,7 @@ DemoExtract
 [GoJieba]:http://github.com/yanyiwu/gojieba
 [Jieba]:https://github.com/fxsjy/jieba
 [Jieba中文分词系列性能评测]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yanyiwu/gojieba/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
