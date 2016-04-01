@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://yanyiwu.mit-license.org)
 [![GoDoc](https://godoc.org/github.com/yanyiwu/gojieba?status.svg)](https://godoc.org/github.com/yanyiwu/gojieba)
 [![Coverage Status](https://coveralls.io/repos/yanyiwu/gojieba/badge.svg?branch=master&service=github)](https://coveralls.io/github/yanyiwu/gojieba?branch=master)
+[![codebeat badge](https://codebeat.co/badges/a336d042-3583-4212-8204-88da4407438e)](https://codebeat.co/projects/github-com-yanyiwu-gojieba)
 
 [![logo](http://7viirv.com1.z0.glb.clouddn.com/gojieba-logo.jpg)](http://yanyiwu.com/work/2015/09/14/c-cpp-go-mix-programming.html)
 
@@ -13,7 +14,11 @@
 
 ## 简介
 
-+ 支持多种分词方式，包括最大概率模式，HMM新词发现模式，搜索引擎模式，全模式等。
++ 支持多种分词方式，包括:
++ 最大概率模式
++ HMM新词发现模式
++ 搜索引擎模式
++ 全模式
 + 核心算法底层由C++实现，性能高效。
 
 ## 用法
@@ -53,7 +58,8 @@ DemoExtract
 
 + Email: `i@yanyiwu.com`
 + QQ: 64162451
-+ WeChat: ![image](http://7viirv.com1.z0.glb.clouddn.com/5a7d1b5c0d_yanyiwu_personal_qrcodes.jpg)
++ WeChat: 
++ ![image](http://7viirv.com1.z0.glb.clouddn.com/5a7d1b5c0d_yanyiwu_personal_qrcodes.jpg)
 
 [CppJieba]:http://github.com/yanyiwu/cppjieba
 [GoJieba]:http://github.com/yanyiwu/gojieba
