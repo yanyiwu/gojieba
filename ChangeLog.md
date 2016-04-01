@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
++ Fix bug: calling C.free manully to free momery allocated by C.CString.
+
 ## v0.11.0
 
 + Expose new api: Tag
