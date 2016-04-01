@@ -1,6 +1,6 @@
 # ChangeLog
 
-## next version
+## v0.11.1
 
 + Fix bug: calling C.free manully to free momery allocated by C.CString.
 
