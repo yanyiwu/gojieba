@@ -20,6 +20,7 @@
 + 搜索引擎模式
 + 全模式
 + 核心算法底层由C++实现，性能高效。
++ 无缝集成到 [bleve] 到进行搜索引擎的中文分词功能。
 
 ## 用法
 
@@ -27,7 +28,7 @@
 go get github.com/yanyiwu/gojieba
 ```
 
-示例代码请见 [example/demo.go](example/demo.go)
+See Details in [example/demo.go](example/demo.go)
 
 ```
 cd example
@@ -50,6 +51,15 @@ DemoExtract
 关键词抽取: CEO/升职/加薪/手扶拖拉机/巅峰
 ```
 
+## Bleve 中文分词插件用法
+
+```
+cd example/bleve
+go run bleve_gojieba_demo.go
+```
+
+See Details in [example/bleve/bleve_gojieba_demo.go](example/bleve/bleve_gojieba_demo.go)
+
 ## 性能测试
 
 [Jieba中文分词系列性能评测]
@@ -65,7 +75,6 @@ DemoExtract
 [GoJieba]:http://github.com/yanyiwu/gojieba
 [Jieba]:https://github.com/fxsjy/jieba
 [Jieba中文分词系列性能评测]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
-
+[bleve]:https://github.com/blevesearch/bleve
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yanyiwu/gojieba/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

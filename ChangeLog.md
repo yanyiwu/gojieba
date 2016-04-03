@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
++ supported [bleve] custom analyzer by using gojieba.
+
 ## v0.11.1
 
 + Fix bug: calling C.free manully to free momery allocated by C.CString.
@@ -54,3 +58,4 @@ Upgrade:
 
 [cppjieba]:https://github.com/yanyiwu/cppjieba
 [limonp]:https://github.com/yanyiwu/limonp
+[bleve]:https://github.com/blevesearch/bleve
