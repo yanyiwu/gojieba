@@ -6,21 +6,30 @@ import (
 	"os"
 
 	"github.com/blevesearch/bleve"
-	_ "github.com/blevesearch/bleve/analysis"
-	_ "github.com/blevesearch/bleve/analysis/analyzers/custom_analyzer"
-	_ "github.com/blevesearch/bleve/registry"
-	_ "github.com/yanyiwu/gojieba/bleveplugin"
+	_ "github.com/yanyiwu/gojieba/bleve"
 )
 
 func main() {
-	message := struct {
+	messages := []struct {
 		Id   string
-		From string
 		Body string
 	}{
-		Id:   "你好",
-		From: "i@yanyiwu.com",
-		Body: "世界",
+		{
+			Id:   "1",
+			Body: "你好",
+		},
+		{
+			Id:   "2",
+			Body: "世界",
+		},
+		{
+			Id:   "3",
+			Body: "亲口",
+		},
+		{
+			Id:   "4",
+			Body: "交代",
+		},
 	}
 
 	indexMapping := bleve.NewIndexMapping()
@@ -40,14 +49,10 @@ func main() {
 	}
 	err = indexMapping.AddCustomAnalyzer("gojieba",
 		map[string]interface{}{
-			"type":      "custom",
+			"type":      "gojieba",
 			"tokenizer": "gojieba",
-			"token_filters": []string{
-				"possessive_en",
-				"to_lower",
-				"stop_en",
-			},
-		})
+		},
+	)
 	if err != nil {
 		panic(err)
 	}
@@ -57,11 +62,28 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	index.Index(message.Id, message)
+	for _, msg := range messages {
+		if err := index.Index(msg.Id, msg); err != nil {
+			panic(err)
+		}
+	}
 
-	query := bleve.NewQueryStringQuery("你好世界")
-	req := bleve.NewSearchRequest(query)
-	res, _ := index.Search(req)
-	x, _ := json.Marshal(res)
-	fmt.Println(string(x))
+	querys := []string{
+		"你好世界",
+		"亲口交代",
+	}
+
+	for _, q := range querys {
+		req := bleve.NewSearchRequest(bleve.NewQueryStringQuery(q))
+		req.Highlight = bleve.NewHighlight()
+		res, err := index.Search(req)
+		if err != nil {
+			panic(err)
+		}
+		x, err := json.Marshal(res)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(string(x))
+	}
 }

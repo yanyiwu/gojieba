@@ -1,4 +1,4 @@
-package bleveplugin
+package bleve
 
 import (
 	"errors"
