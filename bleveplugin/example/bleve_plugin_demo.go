@@ -29,9 +29,9 @@ func main() {
 
 	err := indexMapping.AddCustomTokenizer("gojieba",
 		map[string]interface{}{
-			"dictpath":     "../dict/jieba.dict.utf8",
-			"hmmpath":      "../dict/hmm_model.utf8",
-			"userdictpath": "../dict/user.dict.utf8",
+			"dictpath":     "../../dict/jieba.dict.utf8",
+			"hmmpath":      "../../dict/hmm_model.utf8",
+			"userdictpath": "../../dict/user.dict.utf8",
 			"type":         "gojieba",
 		},
 	)
