@@ -2,20 +2,24 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"path"
 	"strings"
 
 	"github.com/yanyiwu/gojieba"
 )
 
-const (
-	DICT_PATH       = "../dict/jieba.dict.utf8"
-	HMM_PATH        = "../dict/hmm_model.utf8"
-	USER_DICT_PATH  = "../dict/user.dict.utf8"
-	IDF_PATH        = "../dict/idf.utf8"
-	STOP_WORDS_PATH = "../dict/stop_words.utf8"
+var (
+	DICT_DIR        = path.Join(os.Getenv("GOPATH"), "src/github.com/yanyiwu/gojieba/dict")
+	DICT_PATH       = path.Join(DICT_DIR, "jieba.dict.utf8")
+	HMM_PATH        = path.Join(DICT_DIR, "hmm_model.utf8")
+	USER_DICT_PATH  = path.Join(DICT_DIR, "user.dict.utf8")
+	IDF_PATH        = path.Join(DICT_DIR, "idf.utf8")
+	STOP_WORDS_PATH = path.Join(DICT_DIR, "stop_words.utf8")
 )
 
 func DemoJieba() {
+	println(DICT_DIR)
 	fmt.Println("DemoJieba")
 	var words []string
 	use_hmm := true

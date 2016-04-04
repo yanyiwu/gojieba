@@ -31,11 +31,8 @@ go get github.com/yanyiwu/gojieba
 See Details in [example/demo.go](example/demo.go)
 
 ```
-cd example
-go run demo.go
+go run example/demo.go
 ```
-
-之所以需要先 cd 到 example 目录下，是因为 demo.go 里面有写死的字典相对路径。
 
 输出结果：
 
@@ -54,8 +51,7 @@ DemoExtract
 ## Bleve 中文分词插件用法
 
 ```
-cd example/bleve
-go run bleve_gojieba_demo.go
+go run example/bleve/bleve_gojieba_demo.go
 ```
 
 See Details in [example/bleve/bleve_gojieba_demo.go](example/bleve/bleve_gojieba_demo.go)

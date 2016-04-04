@@ -21,8 +21,7 @@ go get github.com/yanyiwu/gojieba
 See example in [example/demo.go](example/demo.go)
 
 ```
-cd example
-go run demo.go
+go run example/demo.go
 ```
 
 Output Result：
