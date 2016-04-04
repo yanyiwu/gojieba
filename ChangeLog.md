@@ -1,6 +1,6 @@
 # ChangeLog
 
-## next version
+## v0.12.0
 
 + supported [bleve] custom analyzer by using gojieba.
 
