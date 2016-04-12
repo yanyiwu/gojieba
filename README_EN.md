@@ -19,21 +19,19 @@
 go get github.com/yanyiwu/gojieba
 ```
 
-See example in [example/](example/example_test.go)
+See example in [example/demo.go](example/demo.go)
+
+```
+go run example/demo.go
+```
 
 Output Result：
 
 ```
-我来到北京清华大学
 全模式: 我/来到/北京/清华/清华大学/华大/大学
-我来到北京清华大学
 精确模式: 我/来到/北京/清华大学
-他来到了网易杭研大厦
 新词识别: 他/来到/了/网易/杭研/大厦
-小明硕士毕业于中国科学院计算所，后在日本京都大学深造
 搜索引擎模式: 小明/硕士/毕业/于/中国/中国科学院/科学/科学院/学院/计算所/，/后/在/日本/日本京都大学/京都/京都大学/大学/深造
-长春市长春药店
-词性标注: 长春市/ns,长春/ns,药店/n
 ```
 
 ## Performance

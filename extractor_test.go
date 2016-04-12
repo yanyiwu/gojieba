@@ -15,15 +15,3 @@ func TestExtractor(t *testing.T) {
 		t.Error(actual)
 	}
 }
-
-func BenchmarkExtractor(b *testing.B) {
-	x := NewExtractor("./dict/jieba.dict.utf8", "./dict/hmm_model.utf8", "./dict/user.dict.utf8", "./dict/idf.utf8", "./dict/stop_words.utf8")
-	defer x.Free()
-	s := "我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。"
-	b.ResetTimer()
-	// Stop Timer before x.Free()
-	defer b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		x.Extract(s, 10)
-	}
-}
