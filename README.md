@@ -50,9 +50,24 @@ See details in [example](example/example_test.go)
 
 See Example in [example/bleve/example_test.go](example/bleve/example_test.go)
 
-## 性能测试
+## 性能评测
 
 [Jieba中文分词系列性能评测]
+
+## 测试
+
+Unittest
+
+```
+go test ./...
+```
+
+Benchmark
+
+```
+go test -bench "Jieba" -test.benchtime 10s
+go test -bench "Extractor" -test.benchtime 10s
+```
 
 ## 客服
 
