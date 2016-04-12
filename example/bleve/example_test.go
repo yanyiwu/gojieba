@@ -15,9 +15,10 @@ var (
 	DICT_PATH      = path.Join(DICT_DIR, "jieba.dict.utf8")
 	HMM_PATH       = path.Join(DICT_DIR, "hmm_model.utf8")
 	USER_DICT_PATH = path.Join(DICT_DIR, "user.dict.utf8")
+	INDEX_DIR      = "gojieba.bleve"
 )
 
-func main() {
+func Example() {
 	messages := []struct {
 		Id   string
 		Body string
@@ -41,8 +42,9 @@ func main() {
 	}
 
 	indexMapping := bleve.NewIndexMapping()
-	dir := "bleve.jieba"
-	os.RemoveAll(dir)
+	os.RemoveAll(INDEX_DIR)
+	// clean index when example finished
+	defer os.RemoveAll(INDEX_DIR)
 
 	err := indexMapping.AddCustomTokenizer("gojieba",
 		map[string]interface{}{
@@ -66,7 +68,7 @@ func main() {
 	}
 	indexMapping.DefaultAnalyzer = "gojieba"
 
-	index, err := bleve.New(dir, indexMapping)
+	index, err := bleve.New(INDEX_DIR, indexMapping)
 	if err != nil {
 		panic(err)
 	}
@@ -88,10 +90,14 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		x, err := json.Marshal(res)
+		x, err := json.Marshal(res.Hits)
 		if err != nil {
 			panic(err)
 		}
 		fmt.Println(string(x))
 	}
+
+	// Output:
+	// [{"id":"2","score":0.4232867878957415,"locations":{"Body":{"世界":[{"pos":1,"start":0,"end":6,"array_positions":null}]}},"fragments":{"Body":["\u003cmark\u003e世界\u003c/mark\u003e"]}},{"id":"1","score":0.4232867878957415,"locations":{"Body":{"你好":[{"pos":1,"start":0,"end":6,"array_positions":null}]}},"fragments":{"Body":["\u003cmark\u003e你好\u003c/mark\u003e"]}}]
+	// [{"id":"4","score":0.4232867878957415,"locations":{"Body":{"交代":[{"pos":1,"start":0,"end":6,"array_positions":null}]}},"fragments":{"Body":["\u003cmark\u003e交代\u003c/mark\u003e"]}},{"id":"3","score":0.4232867878957415,"locations":{"Body":{"亲口":[{"pos":1,"start":0,"end":6,"array_positions":null}]}},"fragments":{"Body":["\u003cmark\u003e亲口\u003c/mark\u003e"]}}]
 }
