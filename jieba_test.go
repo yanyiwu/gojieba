@@ -6,7 +6,7 @@ import (
 )
 
 func TestJieba(t *testing.T) {
-	x := NewJieba("./dict/jieba.dict.utf8", "./dict/hmm_model.utf8", "./dict/user.dict.utf8")
+	x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
 	defer x.Free()
 	var s string
 	var expected string
@@ -57,7 +57,7 @@ func TestJieba(t *testing.T) {
 }
 
 func BenchmarkJieba(b *testing.B) {
-	x := NewJieba("./dict/jieba.dict.utf8", "./dict/hmm_model.utf8", "./dict/user.dict.utf8")
+	x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
 	s := "小明硕士毕业于中国科学院计算所，后在日本京都大学深造"
 	defer x.Free()
 	b.ResetTimer()

@@ -4,21 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path"
 
 	"github.com/blevesearch/bleve"
+	"github.com/yanyiwu/gojieba"
 	_ "github.com/yanyiwu/gojieba/bleve"
 )
 
-var (
-	DICT_DIR       = path.Join(os.Getenv("GOPATH"), "src/github.com/yanyiwu/gojieba/dict")
-	DICT_PATH      = path.Join(DICT_DIR, "jieba.dict.utf8")
-	HMM_PATH       = path.Join(DICT_DIR, "hmm_model.utf8")
-	USER_DICT_PATH = path.Join(DICT_DIR, "user.dict.utf8")
-	INDEX_DIR      = "gojieba.bleve"
-)
-
 func Example() {
+	INDEX_DIR := "gojieba.bleve"
 	messages := []struct {
 		Id   string
 		Body string
@@ -48,9 +41,9 @@ func Example() {
 
 	err := indexMapping.AddCustomTokenizer("gojieba",
 		map[string]interface{}{
-			"dictpath":     DICT_PATH,
-			"hmmpath":      HMM_PATH,
-			"userdictpath": USER_DICT_PATH,
+			"dictpath":     gojieba.DICT_PATH,
+			"hmmpath":      gojieba.HMM_PATH,
+			"userdictpath": gojieba.USER_DICT_PATH,
 			"type":         "gojieba",
 		},
 	)

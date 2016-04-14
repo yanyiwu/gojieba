@@ -2,27 +2,16 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"path"
 	"strings"
 
 	"github.com/yanyiwu/gojieba"
-)
-
-var (
-	DICT_DIR        = path.Join(os.Getenv("GOPATH"), "src/github.com/yanyiwu/gojieba/dict")
-	DICT_PATH       = path.Join(DICT_DIR, "jieba.dict.utf8")
-	HMM_PATH        = path.Join(DICT_DIR, "hmm_model.utf8")
-	USER_DICT_PATH  = path.Join(DICT_DIR, "user.dict.utf8")
-	IDF_PATH        = path.Join(DICT_DIR, "idf.utf8")
-	STOP_WORDS_PATH = path.Join(DICT_DIR, "stop_words.utf8")
 )
 
 func ExampleJieba() {
 	var s string
 	var words []string
 	use_hmm := true
-	x := gojieba.NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
+	x := gojieba.NewJieba(gojieba.DICT_PATH, gojieba.HMM_PATH, gojieba.USER_DICT_PATH)
 	defer x.Free()
 
 	s = "我来到北京清华大学"
@@ -63,7 +52,7 @@ func ExampleJieba() {
 }
 
 func ExampleExtract() {
-	x := gojieba.NewExtractor(DICT_PATH, HMM_PATH, USER_DICT_PATH, IDF_PATH, STOP_WORDS_PATH)
+	x := gojieba.NewExtractor(gojieba.DICT_PATH, gojieba.HMM_PATH, gojieba.USER_DICT_PATH, gojieba.IDF_PATH, gojieba.STOP_WORDS_PATH)
 	defer x.Free()
 
 	s := "我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。"
