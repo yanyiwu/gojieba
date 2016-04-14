@@ -55,3 +55,20 @@ func TestJieba(t *testing.T) {
 		t.Error(actual)
 	}
 }
+
+func BenchmarkJieba(b *testing.B) {
+	x := NewJieba("./dict/jieba.dict.utf8", "./dict/hmm_model.utf8", "./dict/user.dict.utf8")
+	s := "小明硕士毕业于中国科学院计算所，后在日本京都大学深造"
+	defer x.Free()
+	b.ResetTimer()
+	// Stop Timer before x.Free()
+	defer b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		x.Cut(s, false)
+		x.Cut(s, true)
+		x.CutAll(s)
+		x.CutForSearch(s, false)
+		x.CutForSearch(s, true)
+		x.Tag(s)
+	}
+}
