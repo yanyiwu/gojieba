@@ -13,28 +13,16 @@ type Jieba struct {
 }
 
 func NewJieba(paths ...string) *Jieba {
-	dict_path, hmm_path, user_dict_path := getDictPaths(paths...)
-	dpath := C.CString(dict_path)
+	dictpaths := getDictPaths(paths...)
+	dpath := C.CString(dictpaths[0])
 	defer C.free(unsafe.Pointer(dpath))
-	hpath := C.CString(hmm_path)
+	hpath := C.CString(dictpaths[1])
 	defer C.free(unsafe.Pointer(hpath))
-	upath := C.CString(user_dict_path)
+	upath := C.CString(dictpaths[2])
 	defer C.free(unsafe.Pointer(upath))
 	return &Jieba{
 		C.NewJieba(dpath, hpath, upath),
 	}
-}
-
-func getDictPaths(args ...string) (string, string, string) {
-	dicts := [3]string{
-		DICT_PATH,
-		HMM_PATH,
-		USER_DICT_PATH,
-	}
-	for i := 0; i < len(args) && i < len(dicts); i++ {
-		dicts[i] = args[i]
-	}
-	return dicts[0], dicts[1], dicts[2]
 }
 
 func (x *Jieba) Free() {

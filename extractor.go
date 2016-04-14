@@ -12,16 +12,13 @@ type Extractor struct {
 	extractor C.Extractor
 }
 
-func NewExtractor(dict_path, hmm_path, user_dict_path, idf_path, stop_word_path string) *Extractor {
-	dpath := C.CString(dict_path)
+func NewExtractor(paths ...string) *Extractor {
+	dictpaths := getDictPaths(paths...)
+	dpath, hpath, upath, ipath, spath := C.CString(dictpaths[0]), C.CString(dictpaths[1]), C.CString(dictpaths[2]), C.CString(dictpaths[3]), C.CString(dictpaths[4])
 	defer C.free(unsafe.Pointer(dpath))
-	hpath := C.CString(hmm_path)
 	defer C.free(unsafe.Pointer(hpath))
-	upath := C.CString(user_dict_path)
 	defer C.free(unsafe.Pointer(upath))
-	ipath := C.CString(idf_path)
 	defer C.free(unsafe.Pointer(ipath))
-	spath := C.CString(stop_word_path)
 	defer C.free(unsafe.Pointer(spath))
 	return &Extractor{
 		C.NewExtractor(
