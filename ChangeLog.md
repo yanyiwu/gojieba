@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
++ removed example/ and write Example in `*_test.go`
+
 ## v0.12.0
 
 + supported [bleve] custom analyzer by using gojieba.

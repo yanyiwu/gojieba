@@ -1,4 +1,4 @@
-package main
+package bleve
 
 import (
 	"encoding/json"
@@ -7,7 +7,6 @@ import (
 
 	"github.com/blevesearch/bleve"
 	"github.com/yanyiwu/gojieba"
-	_ "github.com/yanyiwu/gojieba/bleve"
 )
 
 func Example() {
