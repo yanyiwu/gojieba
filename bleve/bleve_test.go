@@ -82,14 +82,26 @@ func Example() {
 		if err != nil {
 			panic(err)
 		}
-		x, err := json.Marshal(res.Hits)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println(string(x))
+		fmt.Println(prettify(res))
 	}
 
 	// Output:
-	// [{"id":"2","score":0.4232867878957415,"locations":{"Body":{"世界":[{"pos":1,"start":0,"end":6,"array_positions":null}]}},"fragments":{"Body":["\u003cmark\u003e世界\u003c/mark\u003e"]}},{"id":"1","score":0.4232867878957415,"locations":{"Body":{"你好":[{"pos":1,"start":0,"end":6,"array_positions":null}]}},"fragments":{"Body":["\u003cmark\u003e你好\u003c/mark\u003e"]}}]
-	// [{"id":"4","score":0.4232867878957415,"locations":{"Body":{"交代":[{"pos":1,"start":0,"end":6,"array_positions":null}]}},"fragments":{"Body":["\u003cmark\u003e交代\u003c/mark\u003e"]}},{"id":"3","score":0.4232867878957415,"locations":{"Body":{"亲口":[{"pos":1,"start":0,"end":6,"array_positions":null}]}},"fragments":{"Body":["\u003cmark\u003e亲口\u003c/mark\u003e"]}}]
+	// [{"id":"2","score":0.4232867878957415},{"id":"1","score":0.4232867878957415}]
+	// [{"id":"4","score":0.4232867878957415},{"id":"3","score":0.4232867878957415}]
+}
+
+func prettify(res *bleve.SearchResult) string {
+	type Result struct {
+		Id    string  `json:"id"`
+		Score float64 `json:"score"`
+	}
+	results := []Result{}
+	for _, item := range res.Hits {
+		results = append(results, Result{item.ID, item.Score})
+	}
+	b, err := json.Marshal(results)
+	if err != nil {
+		panic(err)
+	}
+	return string(b)
 }
