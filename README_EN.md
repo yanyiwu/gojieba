@@ -19,9 +19,7 @@
 go get github.com/yanyiwu/gojieba
 ```
 
-See example in [example/](example/example_test.go)
-
-Output Result：
+Chinese Word Segmentation Example:
 
 ```
 我来到北京清华大学
@@ -35,6 +33,13 @@ Output Result：
 长春市长春药店
 词性标注: 长春市/ns,长春/ns,药店/n
 ```
+
+
+See example in [jieba_test](jieba_test.go), [extractor_test](extractor_test.go)
+
+## Bleve Plugin Usage
+
+See example in [bleve_test](bleve/bleve_test.go)
 
 ## Performance
 

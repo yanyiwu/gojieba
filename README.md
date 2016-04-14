@@ -15,13 +15,10 @@
 
 ## 简介
 
-+ 支持多种分词方式，包括:
-+ 最大概率模式
-+ HMM新词发现模式
-+ 搜索引擎模式
-+ 全模式
++ 支持多种分词方式，包括: 最大概率模式, HMM新词发现模式, 搜索引擎模式, 全模式
 + 核心算法底层由C++实现，性能高效。
 + 无缝集成到 [bleve] 到进行搜索引擎的中文分词功能。
++ 字典路径可配置，NewJieba(...string), NewExtractor(...string) 可变形参，当参数为空时使用默认词典(推荐方式)
 
 ## 用法
 
@@ -29,9 +26,7 @@
 go get github.com/yanyiwu/gojieba
 ```
 
-See details in [example](example/example_test.go)
-
-输出结果：
+分词示例
 
 ```
 我来到北京清华大学
@@ -46,9 +41,11 @@ See details in [example](example/example_test.go)
 词性标注: 长春市/ns,长春/ns,药店/n
 ```
 
+See example in [jieba_test](jieba_test.go), [extractor_test](extractor_test.go)
+
 ## Bleve 中文分词插件用法
 
-See Example in [example/bleve/example_test.go](example/bleve/example_test.go)
+See example in [bleve_test](bleve/bleve_test.go)
 
 ## 性能评测
 
