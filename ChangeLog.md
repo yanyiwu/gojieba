@@ -2,7 +2,9 @@
 
 ## next version
 
++ NewJieba(...string) support variable arguments
 + removed example/ and write Example in `*_test.go`
++ add some kind of Benchmark, Testing
 
 ## v0.12.0
 

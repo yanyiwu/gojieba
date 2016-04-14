@@ -10,7 +10,8 @@ func ExampleJieba() {
 	var s string
 	var words []string
 	use_hmm := true
-	x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
+	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
+	x := NewJieba()
 	defer x.Free()
 
 	s = "我来到北京清华大学"
@@ -50,22 +51,9 @@ func ExampleJieba() {
 	// 词性标注: 长春市/ns,长春/ns,药店/n
 }
 
-func ExampleExtract() {
-	x := NewExtractor(DICT_PATH, HMM_PATH, USER_DICT_PATH, IDF_PATH, STOP_WORDS_PATH)
-	defer x.Free()
-
-	s := "我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。"
-	words := x.Extract(s, 5)
-	fmt.Println(s)
-	fmt.Println("关键词抽取:", strings.Join(words, "/"))
-
-	// Output:
-	// 我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。
-	// 关键词抽取: CEO/升职/加薪/手扶拖拉机/巅峰
-}
-
 func TestJieba(t *testing.T) {
-	x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
+	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
+	x := NewJieba()
 	defer x.Free()
 	var s string
 	var expected string
@@ -116,7 +104,8 @@ func TestJieba(t *testing.T) {
 }
 
 func BenchmarkJieba(b *testing.B) {
-	x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
+	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
+	x := NewJieba()
 	s := "小明硕士毕业于中国科学院计算所，后在日本京都大学深造"
 	defer x.Free()
 	b.ResetTimer()
