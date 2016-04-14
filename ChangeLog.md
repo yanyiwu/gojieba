@@ -1,6 +1,6 @@
 # ChangeLog
 
-## next version
+## v0.13.0
 
 + NewJieba(...string) support variable arguments
 + NewExtractor(...string) support variable arguments
