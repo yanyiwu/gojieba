@@ -22,6 +22,49 @@ go get github.com/yanyiwu/gojieba
 Chinese Word Segmentation Example:
 
 ```
+package main
+
+import (
+	"fmt"
+	"strings"
+
+	"github.com/yanyiwu/gojieba"
+)
+
+func main() {
+	var s string
+	var words []string
+	use_hmm := true
+	x := gojieba.NewJieba()
+	defer x.Free()
+
+	s = "我来到北京清华大学"
+	words = x.CutAll(s)
+	fmt.Println(s)
+	fmt.Println("全模式:", strings.Join(words, "/"))
+
+	words = x.Cut(s, use_hmm)
+	fmt.Println(s)
+	fmt.Println("精确模式:", strings.Join(words, "/"))
+
+	s = "他来到了网易杭研大厦"
+	words = x.Cut(s, use_hmm)
+	fmt.Println(s)
+	fmt.Println("新词识别:", strings.Join(words, "/"))
+
+	s = "小明硕士毕业于中国科学院计算所，后在日本京都大学深造"
+	words = x.CutForSearch(s, use_hmm)
+	fmt.Println(s)
+	fmt.Println("搜索引擎模式:", strings.Join(words, "/"))
+
+	s = "长春市长春药店"
+	words = x.Tag(s)
+	fmt.Println(s)
+	fmt.Println("词性标注:", strings.Join(words, ","))
+}
+```
+
+```
 我来到北京清华大学
 全模式: 我/来到/北京/清华/清华大学/华大/大学
 我来到北京清华大学
@@ -38,6 +81,120 @@ Chinese Word Segmentation Example:
 See example in [jieba_test](jieba_test.go), [extractor_test](extractor_test.go)
 
 ## Bleve Plugin Usage
+
+```
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/blevesearch/bleve"
+	"github.com/yanyiwu/gojieba"
+	_ "github.com/yanyiwu/gojieba/bleve"
+)
+
+func Example() {
+	INDEX_DIR := "gojieba.bleve"
+	messages := []struct {
+		Id   string
+		Body string
+	}{
+		{
+			Id:   "1",
+			Body: "你好",
+		},
+		{
+			Id:   "2",
+			Body: "世界",
+		},
+		{
+			Id:   "3",
+			Body: "亲口",
+		},
+		{
+			Id:   "4",
+			Body: "交代",
+		},
+	}
+
+	indexMapping := bleve.NewIndexMapping()
+	os.RemoveAll(INDEX_DIR)
+	// clean index when example finished
+	defer os.RemoveAll(INDEX_DIR)
+
+	err := indexMapping.AddCustomTokenizer("gojieba",
+		map[string]interface{}{
+			"dictpath":     gojieba.DICT_PATH,
+			"hmmpath":      gojieba.HMM_PATH,
+			"userdictpath": gojieba.USER_DICT_PATH,
+			"type":         "gojieba",
+		},
+	)
+	if err != nil {
+		panic(err)
+	}
+	err = indexMapping.AddCustomAnalyzer("gojieba",
+		map[string]interface{}{
+			"type":      "gojieba",
+			"tokenizer": "gojieba",
+		},
+	)
+	if err != nil {
+		panic(err)
+	}
+	indexMapping.DefaultAnalyzer = "gojieba"
+
+	index, err := bleve.New(INDEX_DIR, indexMapping)
+	if err != nil {
+		panic(err)
+	}
+	for _, msg := range messages {
+		if err := index.Index(msg.Id, msg); err != nil {
+			panic(err)
+		}
+	}
+
+	querys := []string{
+		"你好世界",
+		"亲口交代",
+	}
+
+	for _, q := range querys {
+		req := bleve.NewSearchRequest(bleve.NewQueryStringQuery(q))
+		req.Highlight = bleve.NewHighlight()
+		res, err := index.Search(req)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(res)
+	}
+}
+
+func main() {
+	Example()
+}
+```
+
+Output:
+
+```
+2 matches, showing 1 through 2, took 360.584µs
+    1. 2 (0.423287)
+    Body
+        <mark>世界</mark>
+    2. 1 (0.423287)
+    Body
+        <mark>你好</mark>
+
+2 matches, showing 1 through 2, took 131.055µs
+    1. 4 (0.423287)
+    Body
+        <mark>交代</mark>
+    2. 3 (0.423287)
+    Body
+        <mark>亲口</mark>
+```
 
 See example in [bleve_test](bleve/bleve_test.go)
 
