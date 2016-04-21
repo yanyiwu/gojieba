@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
++ upgrade cppjieba -> v4.7.0
+
 ## v0.13.0
 
 + NewJieba(...string) support variable arguments
