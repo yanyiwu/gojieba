@@ -3,6 +3,7 @@
 ## next version
 
 + upgrade cppjieba -> v4.7.0
++ add new api: Tokenize for location information of words
 
 ## v0.13.0
 

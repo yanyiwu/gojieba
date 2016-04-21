@@ -2,6 +2,7 @@ package gojieba
 
 import (
 	"fmt"
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -38,6 +39,16 @@ func ExampleJieba() {
 	fmt.Println(s)
 	fmt.Println("词性标注:", strings.Join(words, ","))
 
+	s = "长春市长春药店"
+	wordinfos := x.Tokenize(s, SearchMode, false)
+	fmt.Println(s)
+	fmt.Println("Tokenize:", wordinfos)
+
+	//s = "长春市长春药店"
+	//wordinfos := x.Tokenize(s, SearchMode, !use_hmm)
+	//fmt.Println(s)
+	//fmt.Println(wordinfos)
+
 	// Output:
 	// 我来到北京清华大学
 	// 全模式: 我/来到/北京/清华/清华大学/华大/大学
@@ -49,6 +60,8 @@ func ExampleJieba() {
 	// 搜索引擎模式: 小明/硕士/毕业/于/中国/中国科学院/科学/科学院/学院/计算所/，/后/在/日本/日本京都大学/京都/京都大学/大学/深造
 	// 长春市长春药店
 	// 词性标注: 长春市/ns,长春/ns,药店/n
+	// 长春市长春药店
+	// Tokenize: [{长春市 0 9} {长春 9 15} {药店 15 21}]
 }
 
 func TestJieba(t *testing.T) {
@@ -100,6 +113,17 @@ func TestJieba(t *testing.T) {
 	actual = strings.Join(x.Tag(s), ",")
 	if expected != actual {
 		t.Error(actual)
+	}
+
+	s = "长春市长春药店"
+	wordinfos := x.Tokenize(s, SearchMode, false)
+	expectedwords := []Word{
+		Word{Str: "长春市", Start: 0, End: 9},
+		Word{Str: "长春", Start: 9, End: 15},
+		Word{Str: "药店", Start: 15, End: 21},
+	}
+	if !reflect.DeepEqual(wordinfos, expectedwords) {
+		t.Error()
 	}
 }
 
