@@ -8,6 +8,19 @@ package gojieba
 import "C"
 import "unsafe"
 
+type TokenizeMode int
+
+const (
+	DefaultMode TokenizeMode = iota
+	SearchMode
+)
+
+type Word struct {
+	Str   string
+	Start int
+	End   int
+}
+
 type Jieba struct {
 	jieba C.Jieba
 }
@@ -71,4 +84,16 @@ func (x *Jieba) Tag(s string) []string {
 	defer C.FreeWords(words)
 	res := cstrings(words)
 	return res
+}
+
+func (x *Jieba) Tokenize(s string, mode TokenizeMode, hmm bool) []Word {
+	c_int_hmm := 0
+	if hmm {
+		c_int_hmm = 1
+	}
+	cstr := C.CString(s)
+	defer C.free(unsafe.Pointer(cstr))
+	var words *C.Word = C.Tokenize(x.jieba, cstr, C.TokenizeMode(mode), C.int(c_int_hmm))
+	defer C.free(unsafe.Pointer(words))
+	return convertWords(s, words)
 }
