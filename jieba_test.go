@@ -40,14 +40,21 @@ func ExampleJieba() {
 	fmt.Println("词性标注:", strings.Join(words, ","))
 
 	s = "长春市长春药店"
-	wordinfos := x.Tokenize(s, SearchMode, false)
+	wordinfos := x.Tokenize(s, SearchMode, !use_hmm)
 	fmt.Println(s)
 	fmt.Println("Tokenize:", wordinfos)
 
-	//s = "长春市长春药店"
-	//wordinfos := x.Tokenize(s, SearchMode, !use_hmm)
-	//fmt.Println(s)
-	//fmt.Println(wordinfos)
+	fmt.Println("设置搜索引擎分词模式的词长阈值，大于阈值的会进行细粒度分词")
+	x.SetCutForSearchThreshold(3)
+
+	s = "长江大桥"
+	words = x.CutForSearch(s, !use_hmm)
+	fmt.Println(s)
+	fmt.Println("搜索引擎模式:", strings.Join(words, "/"))
+
+	wordinfos = x.Tokenize(s, SearchMode, !use_hmm)
+	fmt.Println(s)
+	fmt.Println("Tokenize:", wordinfos)
 
 	// Output:
 	// 我来到北京清华大学
@@ -62,6 +69,11 @@ func ExampleJieba() {
 	// 词性标注: 长春市/ns,长春/ns,药店/n
 	// 长春市长春药店
 	// Tokenize: [{长春市 0 9} {长春 9 15} {药店 15 21}]
+	// 设置搜索引擎分词模式的词长阈值，大于阈值的会进行细粒度分词
+	// 长江大桥
+	// 搜索引擎模式: 长江/长江大桥/大桥
+	// 长江大桥
+	// Tokenize: [{长江 0 6} {长江大桥 0 12} {大桥 6 12}]
 }
 
 func TestJieba(t *testing.T) {
@@ -127,6 +139,31 @@ func TestJieba(t *testing.T) {
 	}
 }
 
+func TestJiebaCutForSearch(t *testing.T) {
+	x := NewJieba()
+	defer x.Free()
+	x.SetCutForSearchThreshold(3)
+	s := "长江大桥"
+	words := x.CutForSearch(s, false)
+	expected := []string{
+		"长江",
+		"长江大桥",
+		"大桥",
+	}
+	if !reflect.DeepEqual(words, expected) {
+		t.Error(words, expected)
+	}
+	wordinfos := x.Tokenize(s, SearchMode, false)
+	expectedwords := []Word{
+		Word{Str: "长江", Start: 0, End: 6},
+		Word{Str: "长江大桥", Start: 0, End: 12},
+		Word{Str: "大桥", Start: 6, End: 12},
+	}
+	if !reflect.DeepEqual(wordinfos, expectedwords) {
+		t.Error(wordinfos, expectedwords)
+	}
+}
+
 func BenchmarkJieba(b *testing.B) {
 	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
 	x := NewJieba()
@@ -142,5 +179,7 @@ func BenchmarkJieba(b *testing.B) {
 		x.CutForSearch(s, false)
 		x.CutForSearch(s, true)
 		x.Tag(s)
+		x.Tokenize(s, DefaultMode, true)
+		x.Tokenize(s, DefaultMode, false)
 	}
 }
