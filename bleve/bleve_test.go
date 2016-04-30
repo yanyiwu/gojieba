@@ -31,6 +31,10 @@ func Example() {
 			Id:   "4",
 			Body: "交代",
 		},
+		{
+			Id:   "5",
+			Body: "长江大桥",
+		},
 	}
 
 	indexMapping := bleve.NewIndexMapping()
@@ -73,6 +77,7 @@ func Example() {
 	querys := []string{
 		"你好世界",
 		"亲口交代",
+		"长江",
 	}
 
 	for _, q := range querys {
@@ -86,8 +91,9 @@ func Example() {
 	}
 
 	// Output:
-	// [{"id":"2","score":0.4232867878957415},{"id":"1","score":0.4232867878957415}]
-	// [{"id":"4","score":0.4232867878957415},{"id":"3","score":0.4232867878957415}]
+	// [{"id":"2","score":0.47907267476955906},{"id":"1","score":0.47907267476955906}]
+	// [{"id":"4","score":0.47907267476955906},{"id":"3","score":0.47907267476955906}]
+	// [{"id":"5","score":0.9581453659370776}]
 }
 
 func prettify(res *bleve.SearchResult) string {
