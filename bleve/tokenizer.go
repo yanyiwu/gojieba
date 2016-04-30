@@ -8,14 +8,18 @@ import (
 	"github.com/yanyiwu/gojieba"
 )
 
+const (
+	CUT_FOR_SEARCH_THRESHOLD = 3
+)
+
 type JiebaTokenizer struct {
 	handle *gojieba.Jieba
 }
 
 func NewJiebaTokenizer(dictpath, hmmpath, userdictpath string) *JiebaTokenizer {
-	return &JiebaTokenizer{
-		gojieba.NewJieba(dictpath, hmmpath, userdictpath),
-	}
+	x := gojieba.NewJieba(dictpath, hmmpath, userdictpath)
+	x.SetCutForSearchThreshold(CUT_FOR_SEARCH_THRESHOLD)
+	return &JiebaTokenizer{x}
 }
 
 func (x *JiebaTokenizer) Free() {
@@ -24,22 +28,18 @@ func (x *JiebaTokenizer) Free() {
 
 func (x *JiebaTokenizer) Tokenize(sentence []byte) analysis.TokenStream {
 	result := make(analysis.TokenStream, 0)
-	start := 0
-	end := 0
 	pos := 1
-	words := x.handle.Cut(string(sentence), false)
+	words := x.handle.Tokenize(string(sentence), gojieba.SearchMode, false)
 	for _, word := range words {
-		end = start + len(word)
 		token := analysis.Token{
-			Term:     []byte(word),
-			Start:    start,
-			End:      end,
+			Term:     []byte(word.Str),
+			Start:    word.Start,
+			End:      word.End,
 			Position: pos,
 			Type:     analysis.Ideographic,
 		}
 		result = append(result, &token)
 		pos++
-		start = end
 	}
 	return result
 }

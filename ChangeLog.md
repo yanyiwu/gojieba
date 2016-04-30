@@ -5,6 +5,7 @@
 + upgrade cppjieba -> v4.7.0
 + add new api: Tokenize for location information of words
 + add new api: SetCutForSearchThreshold
++ use Tokenize instead of Cut and SetCutForSearchThreshold(3) in gojieba/bleve
 
 ## v0.13.0
 
