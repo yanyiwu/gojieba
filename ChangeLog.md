@@ -4,6 +4,7 @@
 
 + upgrade cppjieba -> v4.7.0
 + add new api: Tokenize for location information of words
++ add new api: SetCutForSearchThreshold
 
 ## v0.13.0
 
