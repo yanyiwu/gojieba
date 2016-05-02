@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
++ upgrade cppjieba -> v4.8.0 
+
 ## v0.14.0
 
 + upgrade cppjieba -> v4.7.0
