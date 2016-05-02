@@ -2,7 +2,8 @@
 
 ## next version
 
-+ upgrade cppjieba -> v4.8.0 
++ upgrade cppjieba -> v4.8.0, and make CutForSearch api behaves the same as jieba by Python
++ remove SetCutForSearchThreshold api
 
 ## v0.14.0
 

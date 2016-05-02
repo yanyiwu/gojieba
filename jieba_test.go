@@ -39,20 +39,12 @@ func ExampleJieba() {
 	fmt.Println(s)
 	fmt.Println("词性标注:", strings.Join(words, ","))
 
-	s = "长春市长春药店"
-	wordinfos := x.Tokenize(s, SearchMode, !use_hmm)
-	fmt.Println(s)
-	fmt.Println("Tokenize:", wordinfos)
-
-	fmt.Println("设置搜索引擎分词模式的词长阈值，大于阈值的会进行细粒度分词")
-	x.SetCutForSearchThreshold(3)
-
 	s = "长江大桥"
 	words = x.CutForSearch(s, !use_hmm)
 	fmt.Println(s)
 	fmt.Println("搜索引擎模式:", strings.Join(words, "/"))
 
-	wordinfos = x.Tokenize(s, SearchMode, !use_hmm)
+	wordinfos := x.Tokenize(s, SearchMode, !use_hmm)
 	fmt.Println(s)
 	fmt.Println("Tokenize:", wordinfos)
 
@@ -64,16 +56,13 @@ func ExampleJieba() {
 	// 他来到了网易杭研大厦
 	// 新词识别: 他/来到/了/网易/杭研/大厦
 	// 小明硕士毕业于中国科学院计算所，后在日本京都大学深造
-	// 搜索引擎模式: 小明/硕士/毕业/于/中国/中国科学院/科学/科学院/学院/计算所/，/后/在/日本/日本京都大学/京都/京都大学/大学/深造
+	// 搜索引擎模式: 小明/硕士/毕业/于/中国/科学/学院/科学院/中国科学院/计算/计算所/，/后/在/日本/京都/大学/日本京都大学/深造
 	// 长春市长春药店
 	// 词性标注: 长春市/ns,长春/ns,药店/n
-	// 长春市长春药店
-	// Tokenize: [{长春市 0 9} {长春 9 15} {药店 15 21}]
-	// 设置搜索引擎分词模式的词长阈值，大于阈值的会进行细粒度分词
 	// 长江大桥
-	// 搜索引擎模式: 长江/长江大桥/大桥
+	// 搜索引擎模式: 长江/大桥/长江大桥
 	// 长江大桥
-	// Tokenize: [{长江 0 6} {长江大桥 0 12} {大桥 6 12}]
+	// Tokenize: [{长江 0 6} {大桥 6 12} {长江大桥 0 12}]
 }
 
 func TestJieba(t *testing.T) {
@@ -114,7 +103,7 @@ func TestJieba(t *testing.T) {
 	}
 
 	s = "小明硕士毕业于中国科学院计算所，后在日本京都大学深造"
-	expected = "小明/硕士/毕业/于/中国/中国科学院/科学/科学院/学院/计算所/，/后/在/日本/日本京都大学/京都/京都大学/大学/深造"
+	expected = "小明/硕士/毕业/于/中国/科学/学院/科学院/中国科学院/计算/计算所/，/后/在/日本/京都/大学/日本京都大学/深造"
 	actual = strings.Join(x.CutForSearch(s, use_hmm), "/")
 	if expected != actual {
 		t.Error(actual)
@@ -130,6 +119,7 @@ func TestJieba(t *testing.T) {
 	s = "长春市长春药店"
 	wordinfos := x.Tokenize(s, SearchMode, false)
 	expectedwords := []Word{
+		Word{Str: "长春", Start: 0, End: 6},
 		Word{Str: "长春市", Start: 0, End: 9},
 		Word{Str: "长春", Start: 9, End: 15},
 		Word{Str: "药店", Start: 15, End: 21},
@@ -142,13 +132,12 @@ func TestJieba(t *testing.T) {
 func TestJiebaCutForSearch(t *testing.T) {
 	x := NewJieba()
 	defer x.Free()
-	x.SetCutForSearchThreshold(3)
 	s := "长江大桥"
 	words := x.CutForSearch(s, false)
 	expected := []string{
 		"长江",
-		"长江大桥",
 		"大桥",
+		"长江大桥",
 	}
 	if !reflect.DeepEqual(words, expected) {
 		t.Error(words, expected)
@@ -156,8 +145,8 @@ func TestJiebaCutForSearch(t *testing.T) {
 	wordinfos := x.Tokenize(s, SearchMode, false)
 	expectedwords := []Word{
 		Word{Str: "长江", Start: 0, End: 6},
-		Word{Str: "长江大桥", Start: 0, End: 12},
 		Word{Str: "大桥", Start: 6, End: 12},
+		Word{Str: "长江大桥", Start: 0, End: 12},
 	}
 	if !reflect.DeepEqual(wordinfos, expectedwords) {
 		t.Error(wordinfos, expectedwords)

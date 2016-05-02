@@ -25,6 +25,5 @@ char** CutForSearch(Jieba handle, const char* sentence, int is_hmm_used);
 char** Tag(Jieba handle, const char* sentence);
 
 Word* Tokenize(Jieba x, const char* sentence, TokenizeMode mode, int is_hmm_used);
-void SetCutForSearchThreshold(Jieba x, size_t threshold); 
 
 #endif // CJIEBA_JIEBA_H

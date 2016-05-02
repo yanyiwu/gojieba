@@ -76,7 +76,3 @@ Word* Tokenize(Jieba x, const char* sentence, TokenizeMode mode, int is_hmm_used
       return ConvertWords(words);
   }
 }
-
-void SetCutForSearchThreshold(Jieba x, size_t threshold) {
-  ((cppjieba::Jieba*)x)->SetQuerySegmentThreshold(threshold);
-}

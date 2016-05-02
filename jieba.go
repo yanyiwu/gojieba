@@ -97,7 +97,3 @@ func (x *Jieba) Tokenize(s string, mode TokenizeMode, hmm bool) []Word {
 	defer C.free(unsafe.Pointer(words))
 	return convertWords(s, words)
 }
-
-func (x *Jieba) SetCutForSearchThreshold(threshold int) {
-	C.SetCutForSearchThreshold(x.jieba, C.size_t(threshold))
-}

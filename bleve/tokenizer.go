@@ -8,17 +8,12 @@ import (
 	"github.com/yanyiwu/gojieba"
 )
 
-const (
-	CUT_FOR_SEARCH_THRESHOLD = 3
-)
-
 type JiebaTokenizer struct {
 	handle *gojieba.Jieba
 }
 
 func NewJiebaTokenizer(dictpath, hmmpath, userdictpath string) *JiebaTokenizer {
 	x := gojieba.NewJieba(dictpath, hmmpath, userdictpath)
-	x.SetCutForSearchThreshold(CUT_FOR_SEARCH_THRESHOLD)
 	return &JiebaTokenizer{x}
 }
 
