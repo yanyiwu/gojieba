@@ -39,6 +39,11 @@ func ExampleJieba() {
 	fmt.Println(s)
 	fmt.Println("词性标注:", strings.Join(words, ","))
 
+	s = "区块链"
+	words = x.Tag(s)
+	fmt.Println(s)
+	fmt.Println("词性标注:", strings.Join(words, ","))
+
 	s = "长江大桥"
 	words = x.CutForSearch(s, !use_hmm)
 	fmt.Println(s)
@@ -59,6 +64,8 @@ func ExampleJieba() {
 	// 搜索引擎模式: 小明/硕士/毕业/于/中国/科学/学院/科学院/中国科学院/计算/计算所/，/后/在/日本/京都/大学/日本京都大学/深造
 	// 长春市长春药店
 	// 词性标注: 长春市/ns,长春/ns,药店/n
+	// 区块链
+	// 词性标注: 区块链/nz
 	// 长江大桥
 	// 搜索引擎模式: 长江/大桥/长江大桥
 	// 长江大桥

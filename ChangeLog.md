@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
++ upgrade cppjieba -> v4.8.1 and support (word,freq,tag) format of user dict
+
 ## v0.15.0
 
 + upgrade cppjieba -> v4.8.0, and make CutForSearch api behaves the same as jieba by Python
