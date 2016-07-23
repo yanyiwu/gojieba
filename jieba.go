@@ -86,6 +86,12 @@ func (x *Jieba) Tag(s string) []string {
 	return res
 }
 
+func (x *Jieba) AddWord(s string) {
+	cstr := C.CString(s)
+	defer C.free(unsafe.Pointer(cstr))
+	C.AddWord(x.jieba, cstr)
+}
+
 func (x *Jieba) Tokenize(s string, mode TokenizeMode, hmm bool) []Word {
 	c_int_hmm := 0
 	if hmm {

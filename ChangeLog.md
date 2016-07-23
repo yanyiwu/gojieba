@@ -3,6 +3,7 @@
 ## next version
 
 + upgrade cppjieba -> v4.8.1 and support (word,freq,tag) format of user dict
++ add AddWord api
 
 ## v0.15.0
 

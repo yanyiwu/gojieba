@@ -24,6 +24,17 @@ func ExampleJieba() {
 	fmt.Println(s)
 	fmt.Println("精确模式:", strings.Join(words, "/"))
 
+	s = "比特币"
+	words = x.Cut(s, use_hmm)
+	fmt.Println(s)
+	fmt.Println("精确模式:", strings.Join(words, "/"))
+
+	x.AddWord("比特币")
+	s = "比特币"
+	words = x.Cut(s, use_hmm)
+	fmt.Println(s)
+	fmt.Println("添加词典后,精确模式:", strings.Join(words, "/"))
+
 	s = "他来到了网易杭研大厦"
 	words = x.Cut(s, use_hmm)
 	fmt.Println(s)
@@ -58,6 +69,10 @@ func ExampleJieba() {
 	// 全模式: 我/来到/北京/清华/清华大学/华大/大学
 	// 我来到北京清华大学
 	// 精确模式: 我/来到/北京/清华大学
+	// 比特币
+	// 精确模式: 比特/币
+	// 比特币
+	// 添加词典后,精确模式: 比特币
 	// 他来到了网易杭研大厦
 	// 新词识别: 他/来到/了/网易/杭研/大厦
 	// 小明硕士毕业于中国科学院计算所，后在日本京都大学深造
