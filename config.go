@@ -3,16 +3,36 @@ package gojieba
 import (
 	"os"
 	"path"
+	"strings"
 )
 
 var (
-	DICT_DIR        = path.Join(os.Getenv("GOPATH"), "src/github.com/yanyiwu/gojieba/dict")
-	DICT_PATH       = path.Join(DICT_DIR, "jieba.dict.utf8")
-	HMM_PATH        = path.Join(DICT_DIR, "hmm_model.utf8")
-	USER_DICT_PATH  = path.Join(DICT_DIR, "user.dict.utf8")
-	IDF_PATH        = path.Join(DICT_DIR, "idf.utf8")
-	STOP_WORDS_PATH = path.Join(DICT_DIR, "stop_words.utf8")
+	DICT_DIR        string
+	DICT_PATH       string
+	HMM_PATH        string
+	USER_DICT_PATH  string
+	IDF_PATH        string
+	STOP_WORDS_PATH string
 )
+
+func init() {
+	paths := os.Getenv("GOPATH")
+	path_list := strings.Split(paths, ":")
+	if len(path_list) == 1 {
+		path_list = strings.Split(paths, ";")
+	}
+	for _, p := range path_list {
+		DICT_DIR = path.Join(p, "src/github.com/yanyiwu/gojieba/dict")
+		if isDirExists(DICT_DIR) {
+			break
+		}
+	}
+	DICT_PATH = path.Join(DICT_DIR, "jieba.dict.utf8")
+	HMM_PATH = path.Join(DICT_DIR, "hmm_model.utf8")
+	USER_DICT_PATH = path.Join(DICT_DIR, "user.dict.utf8")
+	IDF_PATH = path.Join(DICT_DIR, "idf.utf8")
+	STOP_WORDS_PATH = path.Join(DICT_DIR, "stop_words.utf8")
+}
 
 const TOTAL_DICT_PATH_NUMBER = 5
 

@@ -1,5 +1,9 @@
 # ChangeLog
 
+## next version
+
++ fix [issue 5](https://github.com/yanyiwu/gojieba/issues/5)
+
 ## v0.16.0
 
 + upgrade cppjieba -> v4.8.1 and support (word,freq,tag) format of user dict

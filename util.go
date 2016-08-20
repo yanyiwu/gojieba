@@ -4,7 +4,20 @@ package gojieba
 #include "jieba.h"
 */
 import "C"
-import "unsafe"
+import (
+	"os"
+	"unsafe"
+)
+
+func isDirExists(path string) bool {
+	fi, err := os.Stat(path)
+	if err != nil {
+		return os.IsExist(err)
+	} else {
+		return fi.IsDir()
+	}
+	return false
+}
 
 func cstrings(x **C.char) []string {
 	var s []string
