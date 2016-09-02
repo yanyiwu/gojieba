@@ -91,9 +91,13 @@ func main() {
 	fmt.Println(s)
 	fmt.Println("搜索引擎模式:", strings.Join(words, "/"))
 
-	wordinfos := x.Tokenize(s, SearchMode, !use_hmm)
+	wordinfos := x.Tokenize(s, gojieba.SearchMode, !use_hmm)
 	fmt.Println(s)
-	fmt.Println("Tokenize:", wordinfos)
+	fmt.Println("Tokenize:(搜索引擎模式)", wordinfos)
+
+	wordinfos = x.Tokenize(s, gojieba.DefaultMode, !use_hmm)
+	fmt.Println(s)
+	fmt.Println("Tokenize:(默认模式)", wordinfos)
 }
 ```
 
