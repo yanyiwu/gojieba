@@ -29,20 +29,6 @@ func cstrings(x **C.char) []string {
 	return s
 }
 
-func cwordweights(x *C.struct_CWordWeight) []WordWeight {
-	var s []WordWeight
-	eltSize := unsafe.Sizeof(*x)
-	for *x != nil {
-		ww := WordWeight{
-			C.GoString(((C.struct_CWordWeight)(*x)).word),
-			(*x).weight,
-		}
-		s = append(s, ww)
-		x = (*C.struct_CWordWeight)(unsafe.Pointer(uintptr(unsafe.Pointer(x)) + eltSize))
-	}
-	return s
-}
-
 func convertWords(s string, words *C.Word) []Word {
 	result := make([]Word, 0)
 	x := words

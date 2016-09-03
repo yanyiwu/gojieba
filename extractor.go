@@ -45,17 +45,30 @@ func (x *Extractor) Extract(s string, topk int) []string {
 }
 
 type WordWeight struct {
-	word   string
-	weight float64
+	Word   string
+	Weight float64
 }
 
 func (x *Extractor) ExtractWithWeight(s string, topk int) []WordWeight {
 	cstr := C.CString(s)
 	defer C.free(unsafe.Pointer(cstr))
-	//var words *C.struct_CWordWeight = C.ExtractWithWeight(x.extractor, cstr, C.int(topk))
 	words := C.ExtractWithWeight(x.extractor, cstr, C.int(topk))
 	p := unsafe.Pointer(words)
 	res := cwordweights((*C.struct_CWordWeight)(p))
 	defer C.FreeWordWeights(words)
 	return res
+}
+
+func cwordweights(x *C.struct_CWordWeight) []WordWeight {
+	var s []WordWeight
+	eltSize := unsafe.Sizeof(*x)
+	for (*x).word != nil {
+		ww := WordWeight{
+			C.GoString(((C.struct_CWordWeight)(*x)).word),
+			float64((*x).weight),
+		}
+		s = append(s, ww)
+		x = (*C.struct_CWordWeight)(unsafe.Pointer(uintptr(unsafe.Pointer(x)) + eltSize))
+	}
+	return s
 }

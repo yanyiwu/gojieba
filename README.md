@@ -98,6 +98,11 @@ func main() {
 	wordinfos = x.Tokenize(s, gojieba.DefaultMode, !use_hmm)
 	fmt.Println(s)
 	fmt.Println("Tokenize:(默认模式)", wordinfos)
+
+	ex := NewExtractor()
+	defer ex.Free()
+    keywords := ex.ExtractWithWeight(s, 5)
+    fmt.Println("Extract:", keywords)
 }
 ```
 
