@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v0.17.0
+
++ add ExtractWithWeight api and fix [issue 6](https://github.com/yanyiwu/gojieba/issues/6)
+
 ## v0.16.1
 
 + fix [issue 5](https://github.com/yanyiwu/gojieba/issues/5)
