@@ -1,9 +1,8 @@
 package gojieba
 
 import (
-	"os"
 	"path"
-	"strings"
+	"runtime"
 )
 
 var (
@@ -16,17 +15,7 @@ var (
 )
 
 func init() {
-	paths := os.Getenv("GOPATH")
-	path_list := strings.Split(paths, ":")
-	if len(path_list) == 1 {
-		path_list = strings.Split(paths, ";")
-	}
-	for _, p := range path_list {
-		DICT_DIR = path.Join(p, "src/github.com/yanyiwu/gojieba/dict")
-		if isDirExists(DICT_DIR) {
-			break
-		}
-	}
+	DICT_DIR = path.Join(path.Dir(getCurrentFilePath()), "dict")
 	DICT_PATH = path.Join(DICT_DIR, "jieba.dict.utf8")
 	HMM_PATH = path.Join(DICT_DIR, "hmm_model.utf8")
 	USER_DICT_PATH = path.Join(DICT_DIR, "user.dict.utf8")
@@ -48,4 +37,9 @@ func getDictPaths(args ...string) [TOTAL_DICT_PATH_NUMBER]string {
 		dicts[i] = args[i]
 	}
 	return dicts
+}
+
+func getCurrentFilePath() string {
+	_, filePath, _, _ := runtime.Caller(1)
+	return filePath
 }
