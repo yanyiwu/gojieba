@@ -99,7 +99,7 @@ func main() {
 	fmt.Println(s)
 	fmt.Println("Tokenize:(默认模式)", wordinfos)
 
-	ex := NewExtractor()
+	ex := gojieba.NewExtractor()
 	defer ex.Free()
     keywords := ex.ExtractWithWeight(s, 5)
     fmt.Println("Extract:", keywords)
