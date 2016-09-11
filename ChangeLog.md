@@ -1,6 +1,6 @@
 # ChangeLog
 
-## next version
+## v1.0.0
 
 Notice:
 
