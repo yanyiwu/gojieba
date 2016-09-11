@@ -65,7 +65,6 @@ func main() {
 	fmt.Println(s)
 	fmt.Println("添加词典后,精确模式:", strings.Join(words, "/"))
 
-
 	s = "他来到了网易杭研大厦"
 	words = x.Cut(s, use_hmm)
 	fmt.Println(s)
@@ -99,10 +98,8 @@ func main() {
 	fmt.Println(s)
 	fmt.Println("Tokenize:(默认模式)", wordinfos)
 
-	ex := gojieba.NewExtractor()
-	defer ex.Free()
-    keywords := ex.ExtractWithWeight(s, 5)
-    fmt.Println("Extract:", keywords)
+	keywords := x.ExtractWithWeight(s, 5)
+	fmt.Println("Extract:", keywords)
 }
 ```
 

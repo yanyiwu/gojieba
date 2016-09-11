@@ -27,14 +27,20 @@ type Jieba struct {
 
 func NewJieba(paths ...string) *Jieba {
 	dictpaths := getDictPaths(paths...)
-	dpath := C.CString(dictpaths[0])
+	dpath, hpath, upath, ipath, spath := C.CString(dictpaths[0]), C.CString(dictpaths[1]), C.CString(dictpaths[2]), C.CString(dictpaths[3]), C.CString(dictpaths[4])
 	defer C.free(unsafe.Pointer(dpath))
-	hpath := C.CString(dictpaths[1])
 	defer C.free(unsafe.Pointer(hpath))
-	upath := C.CString(dictpaths[2])
 	defer C.free(unsafe.Pointer(upath))
+	defer C.free(unsafe.Pointer(ipath))
+	defer C.free(unsafe.Pointer(spath))
 	return &Jieba{
-		C.NewJieba(dpath, hpath, upath),
+		C.NewJieba(
+			dpath,
+			hpath,
+			upath,
+			ipath,
+			spath,
+		),
 	}
 }
 
@@ -102,4 +108,42 @@ func (x *Jieba) Tokenize(s string, mode TokenizeMode, hmm bool) []Word {
 	var words *C.Word = C.Tokenize(x.jieba, cstr, C.TokenizeMode(mode), C.int(c_int_hmm))
 	defer C.free(unsafe.Pointer(words))
 	return convertWords(s, words)
+}
+
+type WordWeight struct {
+	Word   string
+	Weight float64
+}
+
+func (x *Jieba) Extract(s string, topk int) []string {
+	cstr := C.CString(s)
+	defer C.free(unsafe.Pointer(cstr))
+	var words **C.char = C.Extract(x.jieba, cstr, C.int(topk))
+	res := cstrings(words)
+	defer C.FreeWords(words)
+	return res
+}
+
+func (x *Jieba) ExtractWithWeight(s string, topk int) []WordWeight {
+	cstr := C.CString(s)
+	defer C.free(unsafe.Pointer(cstr))
+	words := C.ExtractWithWeight(x.jieba, cstr, C.int(topk))
+	p := unsafe.Pointer(words)
+	res := cwordweights((*C.struct_CWordWeight)(p))
+	defer C.FreeWordWeights(words)
+	return res
+}
+
+func cwordweights(x *C.struct_CWordWeight) []WordWeight {
+	var s []WordWeight
+	eltSize := unsafe.Sizeof(*x)
+	for (*x).word != nil {
+		ww := WordWeight{
+			C.GoString(((C.struct_CWordWeight)(*x)).word),
+			float64((*x).weight),
+		}
+		s = append(s, ww)
+		x = (*C.struct_CWordWeight)(unsafe.Pointer(uintptr(unsafe.Pointer(x)) + eltSize))
+	}
+	return s
 }

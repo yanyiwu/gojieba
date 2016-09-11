@@ -1,5 +1,12 @@
 # ChangeLog
 
+## next version
+
+Notice:
+
++ remove NewExtractor, and use its api in Jieba.
++ upgrade cppjieba to v5.0.0
+
 ## v0.17.1
 
 + fix [issue 8](https://github.com/yanyiwu/gojieba/issues/8)
