@@ -176,6 +176,8 @@ func Example() {
 			"dictpath":     gojieba.DICT_PATH,
 			"hmmpath":      gojieba.HMM_PATH,
 			"userdictpath": gojieba.USER_DICT_PATH,
+			"idf":          gojieba.IDF_PATH,
+			"stop_words":   gojieba.STOP_WORDS_PATH,
 			"type":         "gojieba",
 		},
 	)
