@@ -279,5 +279,3 @@ go test -bench "Extractor" -test.benchtime 10s
 [Jieba]:https://github.com/fxsjy/jieba
 [Jieba中文分词系列性能评测]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
 [bleve]:https://github.com/blevesearch/bleve
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yanyiwu/gojieba/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
