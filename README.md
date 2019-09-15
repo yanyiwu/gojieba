@@ -19,7 +19,6 @@
 
 + 支持多种分词方式，包括: 最大概率模式, HMM新词发现模式, 搜索引擎模式, 全模式
 + 核心算法底层由C++实现，性能高效。
-+ 无缝集成到 [bleve] 到进行搜索引擎的中文分词功能。
 + 字典路径可配置，NewJieba(...string), NewExtractor(...string) 可变形参，当参数为空时使用默认词典(推荐方式)
 
 ## 用法
@@ -129,126 +128,6 @@ Tokenize: [{长江 0 6} {大桥 6 12} {长江大桥 0 12}]
 
 See example in [jieba_test](jieba_test.go), [extractor_test](extractor_test.go)
 
-## Bleve 中文分词插件用法
-
-```
-package main
-
-import (
-	"fmt"
-	"os"
-
-	"github.com/blevesearch/bleve"
-	"github.com/yanyiwu/gojieba"
-	_ "github.com/yanyiwu/gojieba/bleve"
-)
-
-func Example() {
-	INDEX_DIR := "gojieba.bleve"
-	messages := []struct {
-		Id   string
-		Body string
-	}{
-		{
-			Id:   "1",
-			Body: "你好",
-		},
-		{
-			Id:   "2",
-			Body: "世界",
-		},
-		{
-			Id:   "3",
-			Body: "亲口",
-		},
-		{
-			Id:   "4",
-			Body: "交代",
-		},
-	}
-
-	indexMapping := bleve.NewIndexMapping()
-	os.RemoveAll(INDEX_DIR)
-	// clean index when example finished
-	defer os.RemoveAll(INDEX_DIR)
-
-	err := indexMapping.AddCustomTokenizer("gojieba",
-		map[string]interface{}{
-			"dictpath":     gojieba.DICT_PATH,
-			"hmmpath":      gojieba.HMM_PATH,
-			"userdictpath": gojieba.USER_DICT_PATH,
-			"idf":          gojieba.IDF_PATH,
-			"stop_words":   gojieba.STOP_WORDS_PATH,
-			"type":         "gojieba",
-		},
-	)
-	if err != nil {
-		panic(err)
-	}
-	err = indexMapping.AddCustomAnalyzer("gojieba",
-		map[string]interface{}{
-			"type":      "gojieba",
-			"tokenizer": "gojieba",
-		},
-	)
-	if err != nil {
-		panic(err)
-	}
-	indexMapping.DefaultAnalyzer = "gojieba"
-
-	index, err := bleve.New(INDEX_DIR, indexMapping)
-	if err != nil {
-		panic(err)
-	}
-	for _, msg := range messages {
-		if err := index.Index(msg.Id, msg); err != nil {
-			panic(err)
-		}
-	}
-
-	querys := []string{
-		"你好世界",
-		"亲口交代",
-	}
-
-	for _, q := range querys {
-		req := bleve.NewSearchRequest(bleve.NewQueryStringQuery(q))
-		req.Highlight = bleve.NewHighlight()
-		res, err := index.Search(req)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println(res)
-	}
-}
-
-func main() {
-	Example()
-}
-```
-
-Output:
-
-```
-2 matches, showing 1 through 2, took 360.584µs
-    1. 2 (0.423287)
-    Body
-        <mark>世界</mark>
-    2. 1 (0.423287)
-    Body
-        <mark>你好</mark>
-
-2 matches, showing 1 through 2, took 131.055µs
-    1. 4 (0.423287)
-    Body
-        <mark>交代</mark>
-    2. 3 (0.423287)
-    Body
-        <mark>亲口</mark>
-```
-
-See example in [bleve_test](bleve/bleve_test.go)
-
 ## 性能评测
 
 [Jieba中文分词系列性能评测]
@@ -276,4 +155,3 @@ go test -bench "Extractor" -test.benchtime 10s
 [GoJieba]:http://github.com/yanyiwu/gojieba
 [Jieba]:https://github.com/fxsjy/jieba
 [Jieba中文分词系列性能评测]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
-[bleve]:https://github.com/blevesearch/bleve
