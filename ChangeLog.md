@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v1.1.0
+
++ remove [bleve] to pass travis-ci testing.
+
 ## v1.0.0
 
 Notice:
