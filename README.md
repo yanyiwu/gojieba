@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/yanyiwu/gojieba.png?branch=master)](https://travis-ci.org/yanyiwu/gojieba) 
 [![Author](https://img.shields.io/badge/author-@yanyiwu-blue.svg?style=flat)](http://yanyiwu.com/) 
+[![Donate](https://img.shields.io/badge/donate-eos_git@yanyiwu-orange.svg)](https://eospark.com/account/gitatyanyiwu)
 [![Performance](https://img.shields.io/badge/performance-excellent-brightgreen.svg?style=flat)](http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html) 
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://yanyiwu.mit-license.org)
 [![GoDoc](https://godoc.org/github.com/yanyiwu/gojieba?status.svg)](https://godoc.org/github.com/yanyiwu/gojieba)
@@ -270,9 +271,6 @@ go test -bench "Extractor" -test.benchtime 10s
 ## 客服
 
 + Email: `i@yanyiwu.com`
-+ QQ: 64162451
-+ WeChat: 
-+ ![image](http://7viirv.com1.z0.glb.clouddn.com/5a7d1b5c0d_yanyiwu_personal_qrcodes.jpg)
 
 [CppJieba]:http://github.com/yanyiwu/cppjieba
 [GoJieba]:http://github.com/yanyiwu/gojieba
