@@ -129,11 +129,9 @@ Tokenize: [{长江 0 6} {大桥 6 12} {长江大桥 0 12}]
 
 See example in [jieba_test](jieba_test.go), [extractor_test](extractor_test.go)
 
-## 性能评测
+## Benchmark
 
 [Jieba中文分词系列性能评测]
-
-## 测试
 
 Unittest
 
@@ -148,7 +146,14 @@ go test -bench "Jieba" -test.benchtime 10s
 go test -bench "Extractor" -test.benchtime 10s
 ```
 
-## 客服
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/yanyiwu/gojieba/graphs/contributors"><img src="https://opencollective.com/gojieba/contributors.svg?width=890&button=false" /></a>
+
+## Contact
 
 + Email: `i@yanyiwu.com`
 
