@@ -15,3 +15,13 @@ notifications:
   email:
     on_success: change
     on_failure: always
+deploy:
+  provider: releases
+  api_key: ${GH_TOKEN}
+  file_glob: true
+  file:
+    - releases/*
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: true
