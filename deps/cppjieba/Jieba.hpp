@@ -72,6 +72,15 @@ class Jieba {
     return dict_trie_.InsertUserWord(word, tag);
   }
 
+  bool InsertUserWord(const string& word,int freq, const string& tag = UNKNOWN_TAG) {
+    return dict_trie_.InsertUserWord(word,freq, tag);
+  }
+
+  bool Find(const string& word)
+  {
+    return dict_trie_.Find(word);
+  }
+
   void ResetSeparators(const string& s) {
     //TODO
     mp_seg_.ResetSeparators(s);
@@ -84,8 +93,21 @@ class Jieba {
   const DictTrie* GetDictTrie() const {
     return &dict_trie_;
   } 
+  
   const HMMModel* GetHMMModel() const {
     return &model_;
+  }
+
+  void LoadUserDict(const vector<string>& buf)  {
+    dict_trie_.LoadUserDict(buf);
+  }
+
+  void LoadUserDict(const set<string>& buf)  {
+    dict_trie_.LoadUserDict(buf);
+  }
+
+  void LoadUserDict(const string& path)  {
+    dict_trie_.LoadUserDict(path);
   }
 
  private:
