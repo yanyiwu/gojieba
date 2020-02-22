@@ -12,6 +12,9 @@
 #elif defined _MSC_VER
 #include <unordered_map>
 #include <unordered_set>
+#elif defined __aarch64__
+#include <unordered_map>
+#include <unordered_set>
 #else
 #include <tr1/unordered_map>
 #include <tr1/unordered_set>
