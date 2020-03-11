@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v1.1.2
+
++ upgrade cppjieba to v5.0.3
+
 ## v1.1.1
 
 + merge [pr-60](https://github.com/yanyiwu/gojieba/pull/60)
