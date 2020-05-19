@@ -24,13 +24,13 @@
 
 ## 用法
 
-```
+```bash
 go get github.com/yanyiwu/gojieba
 ```
 
 分词示例
 
-```
+```golang
 package main
 
 import (
@@ -135,13 +135,13 @@ See example in [jieba_test](jieba_test.go), [extractor_test](extractor_test.go)
 
 Unittest
 
-```
+```bash
 go test ./...
 ```
 
 Benchmark
 
-```
+```bash
 go test -bench "Jieba" -test.benchtime 10s
 go test -bench "Extractor" -test.benchtime 10s
 ```
