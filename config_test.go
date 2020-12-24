@@ -11,5 +11,5 @@ func TestConfig(t *testing.T) {
 }
 
 func TestGetDictPaths(t *testing.T) {
-	fmt.Println(getDictPaths("", "", "my.user.dict"))
+	fmt.Println(getDictPaths(DictPath("dictpath"), IdfPath("idfPath"), "user_dict_path"))
 }
