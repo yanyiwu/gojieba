@@ -6,7 +6,9 @@ package gojieba
 #include "jieba.h"
 */
 import "C"
-import "unsafe"
+import (
+	"unsafe"
+)
 
 type TokenizeMode int
 

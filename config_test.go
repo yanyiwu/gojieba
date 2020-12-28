@@ -1,6 +1,8 @@
 package gojieba
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestConfig(t *testing.T) {
 	file := getCurrentFilePath()
