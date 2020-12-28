@@ -12,6 +12,14 @@ func ExampleJieba() {
 	var words []string
 	use_hmm := true
 	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
+
+	//equals with x := NewJieba([
+	// 	[DictPath(dict_path string)],
+	// 	[HmmPath(hmm_path string)],
+	// 	[UserDictPath(user_dict_path string)],
+	// 	[IdfPath(idf_path string)],
+	// 	[StopWordsPath(stop_words_path string)]
+	// ]) All Default Path to : dict/
 	x := NewJieba()
 	defer x.Free()
 
@@ -88,8 +96,15 @@ func ExampleJieba() {
 }
 
 func TestJieba(t *testing.T) {
-	x := NewJieba(DictPath(DICT_PATH), HMM_PATH, UserDictPath(USER_DICT_PATH))
-	// x := NewJieba()
+	//equals with x := NewJieba(DictPath(DICT_PATH), HMM_PATH, UserDictPath(USER_DICT_PATH))
+	//equals with x := NewJieba([
+	// 	[DictPath(dict_path string)],
+	// 	[HmmPath(hmm_path string)],
+	// 	[UserDictPath(user_dict_path string)],
+	// 	[IdfPath(idf_path string)],
+	// 	[StopWordsPath(stop_words_path string)]
+	// ]) All Default Path to : dict/
+	x := NewJieba()
 	defer x.Free()
 	var s string
 	var expected string
