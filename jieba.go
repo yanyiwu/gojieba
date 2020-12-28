@@ -7,7 +7,6 @@ package gojieba
 */
 import "C"
 import (
-	"fmt"
 	"unsafe"
 )
 
@@ -30,9 +29,7 @@ type Jieba struct {
 
 func NewJieba(paths ...string) *Jieba {
 	dictpaths := getDictPaths(paths...)
-	fmt.Println(dictpaths)
 	dpath, hpath, upath, ipath, spath := C.CString(dictpaths[0]), C.CString(dictpaths[1]), C.CString(dictpaths[2]), C.CString(dictpaths[3]), C.CString(dictpaths[4])
-	fmt.Println(dpath, hpath, upath, ipath, spath)
 	defer C.free(unsafe.Pointer(dpath))
 	defer C.free(unsafe.Pointer(hpath))
 	defer C.free(unsafe.Pointer(upath))

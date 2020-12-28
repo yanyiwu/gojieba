@@ -12,7 +12,7 @@ func ExampleJieba() {
 	var words []string
 	use_hmm := true
 	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
-	x := NewJieba(DictPath("dictpath"), IdfPath("idfPath"), "user_dict_path")
+	x := NewJieba()
 	defer x.Free()
 
 	s = "我来到北京清华大学"
@@ -88,8 +88,8 @@ func ExampleJieba() {
 }
 
 func TestJieba(t *testing.T) {
-	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
-	x := NewJieba()
+	x := NewJieba(DictPath(DICT_PATH), HMM_PATH, UserDictPath(USER_DICT_PATH))
+	// x := NewJieba()
 	defer x.Free()
 	var s string
 	var expected string
