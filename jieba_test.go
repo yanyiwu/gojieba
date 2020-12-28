@@ -12,7 +12,7 @@ func ExampleJieba() {
 	var words []string
 	use_hmm := true
 	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
-	x := NewJieba()
+	x := NewJieba(DictPath("dictpath"), IdfPath("idfPath"), "user_dict_path")
 	defer x.Free()
 
 	s = "我来到北京清华大学"

@@ -1,7 +1,6 @@
 package gojieba
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -11,5 +10,5 @@ func TestConfig(t *testing.T) {
 }
 
 func TestGetDictPaths(t *testing.T) {
-	fmt.Println(getDictPaths(DictPath("dictpath"), IdfPath("idfPath"), "user_dict_path"))
+	println(getDictPaths(DictPath("dictpath"), IdfPath("idfPath"), "user_dict_path"))
 }
