@@ -1,5 +1,6 @@
 # GoJieba [English](README_EN.md)
 
+[![Go](https://github.com/yanyiwu/gojieba/actions/workflows/go.yml/badge.svg)](https://github.com/yanyiwu/gojieba/actions/workflows/go.yml)
 [![Build Status](https://travis-ci.org/yanyiwu/gojieba.png?branch=master)](https://travis-ci.org/yanyiwu/gojieba) 
 [![Author](https://img.shields.io/badge/author-@yanyiwu-blue.svg?style=flat)](http://yanyiwu.com/) 
 [![Donate](https://img.shields.io/badge/donate-eos_gitdeveloper-orange.svg)](https://eosflare.io/account/gitdeveloper)
