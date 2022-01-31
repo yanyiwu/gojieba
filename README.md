@@ -1,7 +1,6 @@
 # GoJieba [English](README_EN.md)
 
 [![Go](https://github.com/yanyiwu/gojieba/actions/workflows/go.yml/badge.svg)](https://github.com/yanyiwu/gojieba/actions/workflows/go.yml)
-[![Build Status](https://travis-ci.org/yanyiwu/gojieba.png?branch=master)](https://travis-ci.org/yanyiwu/gojieba) 
 [![Author](https://img.shields.io/badge/author-@yanyiwu-blue.svg?style=flat)](http://yanyiwu.com/) 
 [![Tag](https://img.shields.io/github/v/tag/yanyiwu/gojieba.svg)](https://github.com/yanyiwu/gojieba/releases)
 [![Performance](https://img.shields.io/badge/performance-excellent-brightgreen.svg?style=flat)](http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html) 
