@@ -61,6 +61,29 @@ class DictTrie {
     return true;
   }
 
+  bool RemoveUserWord(const string& word, const string& tag = UNKNOWN_TAG) {
+    const DictUnit* node_info = FindNode(word);
+        for (size_t i = 0; i < active_node_infos_.size(); i++) {
+      if (&active_node_infos_[i] == node_info) {
+        active_node_infos_.erase(active_node_infos_.begin() + i);
+        break;
+      }
+    }
+    trie_->RemoveNode(node_info->word);
+    return true;
+  }
+
+  const DictUnit* FindNode(const string& word) const {
+    const DictUnit *tmp = NULL;
+    RuneStrArray runes;
+    if (!DecodeRunesInString(word, runes))
+    {
+      XLOG(ERROR) << "Decode failed.";
+    }
+    tmp = Find(runes.begin(), runes.end());
+    return tmp;
+  }
+
   const DictUnit* Find(RuneStrArray::const_iterator begin, RuneStrArray::const_iterator end) const {
     return trie_->Find(begin, end);
   }

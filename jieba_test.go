@@ -7,6 +7,39 @@ import (
 	"testing"
 )
 
+func TestJiebaWord(t *testing.T) {
+	var s string
+	var expected string
+	var actual string
+	var words []string
+	use_hmm := true
+	x := NewJieba()
+	defer x.Free()
+	x.AddWord("北京市外交部")
+	x.AddWord("北京市交通文化局")
+	s = "这里是北京市外交部部长，北京市交通文化局局长"
+	expected = "这里/是/北京市外交部/部长/，/北京市交通文化局/局长"
+	words = x.Cut(s, use_hmm)
+	actual = strings.Join(words, "/")
+	if expected != actual {
+		t.Error(expected, actual)
+	}
+	x.RemoveWord("北京市交通文化局")
+	expected = "这里/是/北京市外交部/部长/，/北京市/交通/文化局/局长"
+	words = x.Cut(s, use_hmm)
+	actual = strings.Join(words, "/")
+	if expected != actual {
+		t.Error(expected, actual)
+	}
+	x.RemoveWord("北京市外交部")
+	expected = "这里/是/北京市/外交部/部长/，/北京市/交通/文化局/局长"
+	words = x.Cut(s, use_hmm)
+	actual = strings.Join(words, "/")
+	if expected != actual {
+		t.Error(expected, actual)
+	}
+}
+
 func ExampleJieba() {
 	var s string
 	var words []string

@@ -142,6 +142,26 @@ class Trie {
     ptNode->ptValue = ptValue;
   }
 
+  void RemoveNode(const Unicode& key) {
+    if (key.begin() == key.end()) {
+      return;
+    }
+    TrieNode::NextMap::iterator kmIter;
+    TrieNode *ptNode = root_;
+    for (Unicode::const_iterator citer = key.begin(); citer != key.end(); ++citer) {
+      if (NULL == ptNode->next) {
+        return;
+      }
+      kmIter = ptNode->next->find(*citer);
+      if (ptNode->next->end() == kmIter) {
+        return;
+      }
+      ptNode = kmIter->second;
+    }
+    assert(ptNode != NULL);
+    ptNode->ptValue = NULL;
+  }
+
  private:
   void CreateTrie(const vector<Unicode>& keys, const vector<const DictUnit*>& valuePointers) {
     if (valuePointers.empty() || keys.empty()) {
