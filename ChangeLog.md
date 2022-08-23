@@ -6,7 +6,7 @@
 
 ## v1.1.1
 
-+ merge [pr-60](https://github.com/yanyiwu/gojieba/pull/60)
++ merge [pr-60](https://github.com/goylord/gojieba/pull/60)
 
 ## v1.1.0
 
@@ -21,15 +21,15 @@ Notice:
 
 ## v0.17.1
 
-+ fix [issue 8](https://github.com/yanyiwu/gojieba/issues/8)
++ fix [issue 8](https://github.com/goylord/gojieba/issues/8)
 
 ## v0.17.0
 
-+ add ExtractWithWeight api and fix [issue 6](https://github.com/yanyiwu/gojieba/issues/6)
++ add ExtractWithWeight api and fix [issue 6](https://github.com/goylord/gojieba/issues/6)
 
 ## v0.16.1
 
-+ fix [issue 5](https://github.com/yanyiwu/gojieba/issues/5)
++ fix [issue 5](https://github.com/goylord/gojieba/issues/5)
 
 ## v0.16.0
 

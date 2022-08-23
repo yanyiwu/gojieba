@@ -1,11 +1,11 @@
 # GoJieba [English](README_EN.md)
 
-[![Go](https://github.com/yanyiwu/gojieba/actions/workflows/go.yml/badge.svg)](https://github.com/yanyiwu/gojieba/actions/workflows/go.yml)
+[![Go](https://github.com/goylord/gojieba/actions/workflows/go.yml/badge.svg)](https://github.com/goylord/gojieba/actions/workflows/go.yml)
 [![Author](https://img.shields.io/badge/author-@yanyiwu-blue.svg?style=flat)](http://yanyiwu.com/) 
-[![Tag](https://img.shields.io/github/v/tag/yanyiwu/gojieba.svg)](https://github.com/yanyiwu/gojieba/releases)
+[![Tag](https://img.shields.io/github/v/tag/yanyiwu/gojieba.svg)](https://github.com/goylord/gojieba/releases)
 [![Performance](https://img.shields.io/badge/performance-excellent-brightgreen.svg?style=flat)](http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html) 
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://yanyiwu.mit-license.org)
-[![GoDoc](https://godoc.org/github.com/yanyiwu/gojieba?status.svg)](https://godoc.org/github.com/yanyiwu/gojieba)
+[![GoDoc](https://godoc.org/github.com/goylord/gojieba?status.svg)](https://godoc.org/github.com/goylord/gojieba)
 [![Coverage Status](https://coveralls.io/repos/yanyiwu/gojieba/badge.svg?branch=master&service=github)](https://coveralls.io/github/yanyiwu/gojieba?branch=master)
 [![codebeat badge](https://codebeat.co/badges/a336d042-3583-4212-8204-88da4407438e)](https://codebeat.co/projects/github-com-yanyiwu-gojieba)
 [![Go Report Card](https://goreportcard.com/badge/yanyiwu/gojieba)](https://goreportcard.com/report/yanyiwu/gojieba)
@@ -24,7 +24,7 @@
 ## 用法
 
 ```bash
-go get github.com/yanyiwu/gojieba
+go get github.com/goylord/gojieba
 ```
 
 分词示例
@@ -36,7 +36,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/yanyiwu/gojieba"
+	"github.com/goylord/gojieba"
 )
 
 func main() {
@@ -150,13 +150,13 @@ go test -bench "Extractor" -test.benchtime 10s
 ### Code Contributors
 
 This project exists thanks to all the people who contribute.
-<a href="https://github.com/yanyiwu/gojieba/graphs/contributors"><img src="https://opencollective.com/gojieba/contributors.svg?width=890&button=false" /></a>
+<a href="https://github.com/goylord/gojieba/graphs/contributors"><img src="https://opencollective.com/gojieba/contributors.svg?width=890&button=false" /></a>
 
 ## Contact
 
 + Email: `i@yanyiwu.com`
 
 [CppJieba]:http://github.com/yanyiwu/cppjieba
-[GoJieba]:http://github.com/yanyiwu/gojieba
+[GoJieba]:http://github.com/goylord/gojieba
 [Jieba]:https://github.com/fxsjy/jieba
 [Jieba中文分词系列性能评测]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
