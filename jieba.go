@@ -103,6 +103,12 @@ func (x *Jieba) AddWord(s string) {
 	C.AddWord(x.jieba, cstr)
 }
 
+func (x *Jieba) RemoveWord(s string) {
+	cstr := C.CString(s)
+	defer C.free(unsafe.Pointer(cstr))
+	C.RemoveWord(x.jieba, cstr)
+}
+
 func (x *Jieba) Tokenize(s string, mode TokenizeMode, hmm bool) []Word {
 	c_int_hmm := 0
 	if hmm {
