@@ -1,5 +1,10 @@
 # ChangeLog
 
+## v1.2.0
+
+- Merged [pr-96 Fix - memory allocted by cgo will not automaticlly free by gc.](https://github.com/yanyiwu/gojieba/pull/96)
+- Merged [pr-99 feature: add RemoveWord api #99](https://github.com/yanyiwu/gojieba/pull/99)
+
 ## v1.1.2
 
 + upgrade cppjieba to v5.0.3
