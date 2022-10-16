@@ -35,6 +35,18 @@ func ExampleJieba() {
 	fmt.Println(s)
 	fmt.Println("添加词典后,精确模式:", strings.Join(words, "/"))
 
+	x.AddWord("这是一个很长的关键字")
+	s = "这是一个很长的关键字"
+	words = x.Extract(s, 3)
+	fmt.Println(s)
+	fmt.Println("添加词典后,Extract:", strings.Join(words, "/"))
+
+	x.RemoveWord("这是一个很长的关键字")
+	s = "这是一个很长的关键字"
+	words = x.Extract(s, 3)
+	fmt.Println(s)
+	fmt.Println("从词典删除后,Extract:", strings.Join(words, "/"))
+
 	s = "他来到了网易杭研大厦"
 	words = x.Cut(s, use_hmm)
 	fmt.Println(s)
@@ -73,6 +85,10 @@ func ExampleJieba() {
 	// 精确模式: 比特/币
 	// 比特币
 	// 添加词典后,精确模式: 比特币
+	// 这是一个很长的关键字
+	// 添加词典后,Extract: 这是一个很长的关键字
+	// 这是一个很长的关键字
+	// 从词典删除后,Extract: 关键字/很长/这是
 	// 他来到了网易杭研大厦
 	// 新词识别: 他/来到/了/网易/杭研/大厦
 	// 小明硕士毕业于中国科学院计算所，后在日本京都大学深造
@@ -206,10 +222,19 @@ func ExampleExtract() {
 	word_weights := x.ExtractWithWeight(s, 5)
 	fmt.Println("关键词抽取:", word_weights)
 
+	x.AddWord("人生巅峰")
+	words = x.Extract(s, 5)
+	fmt.Println("AddWord后关键词抽取:", strings.Join(words, "/"))
+
+	x.RemoveWord("人生巅峰")
+	words = x.Extract(s, 5)
+	fmt.Println("RemoveWord后关键词抽取:", strings.Join(words, "/"))
 	// Output:
 	// 我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。
 	// 关键词抽取: CEO/升职/加薪/手扶拖拉机/巅峰
 	// 关键词抽取: [{CEO 11.739204307083542} {升职 10.8561552143} {加薪 10.642581114} {手扶拖拉机 10.0088573539} {巅峰 9.49395840471}]
+	// AddWord后关键词抽取: CEO/人生巅峰/升职/加薪/手扶拖拉机
+	// RemoveWord后关键词抽取: CEO/升职/加薪/手扶拖拉机/巅峰
 }
 
 func TestExtractor(t *testing.T) {

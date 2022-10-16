@@ -28,6 +28,7 @@ char** CutAll(Jieba handle, const char* sentence);
 char** CutForSearch(Jieba handle, const char* sentence, int is_hmm_used);
 char** Tag(Jieba handle, const char* sentence);
 void AddWord(Jieba handle, const char* word);
+void RemoveWord(Jieba handle, const char* word);
 
 Word* Tokenize(Jieba x, const char* sentence, TokenizeMode mode, int is_hmm_used);
 
