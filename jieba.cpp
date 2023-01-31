@@ -84,6 +84,10 @@ void AddWord(Jieba x, const char* word) {
   ((cppjieba::Jieba*)x)->InsertUserWord(word);
 }
 
+void AddWordEx(Jieba x, const char* word, int freq, const char* tag) {
+  ((cppjieba::Jieba*)x)->InsertUserWord(word, freq, tag);
+}
+
 void RemoveWord(Jieba x, const char* word) {
   ((cppjieba::Jieba*)x)->DeleteUserWord(word);
 }

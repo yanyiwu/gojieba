@@ -103,6 +103,14 @@ func (x *Jieba) AddWord(s string) {
 	C.AddWord(x.jieba, cstr)
 }
 
+func (x *Jieba) AddWordEx(s string, freq int, tag string) {
+	cstr := C.CString(s)
+	ctag := C.CString(tag)
+	defer C.free(unsafe.Pointer(ctag))
+	defer C.free(unsafe.Pointer(cstr))
+	C.AddWordEx(x.jieba, cstr, C.int(freq), ctag)
+}
+
 func (x *Jieba) RemoveWord(s string) {
 	cstr := C.CString(s)
 	defer C.free(unsafe.Pointer(cstr))
