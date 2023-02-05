@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v1.3.0
+
+- Merged [pr-103 AddWordEx](https://github.com/yanyiwu/gojieba/pull/103)
+
 ## v1.2.0
 
 - Merged [pr-96 Fix - memory allocted by cgo will not automaticlly free by gc.](https://github.com/yanyiwu/gojieba/pull/96)
