@@ -53,6 +53,7 @@ func main() {
 	fmt.Println("精确模式:", strings.Join(words, "/"))
 
 	x.AddWord("比特币")
+	// x.AddWordEx("比特币", 100000, "")
 	s = "比特币"
 	words = x.Cut(s, use_hmm)
 	fmt.Println(s)

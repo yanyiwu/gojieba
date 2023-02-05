@@ -58,6 +58,9 @@ func main() {
 	fmt.Println("精确模式:", strings.Join(words, "/"))
 
 	x.AddWord("比特币")
+	// `AddWordEx` 支持指定词语的权重，作为 `AddWord` 权重太低加词失败的补充。
+	// `tag` 参数可以为空字符串，也可以指定词性。
+	// x.AddWordEx("比特币", 100000, "")
 	s = "比特币"
 	words = x.Cut(s, use_hmm)
 	fmt.Println(s)
