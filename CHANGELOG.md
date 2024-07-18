@@ -1,4 +1,8 @@
-# ChangeLog
+# CHANGELOG
+
+## Next Version
+
++ [github/actions] go-version: ['1.17', '1.18', '1.19', '1.20', '1.21']
 
 ## v1.3.0
 
