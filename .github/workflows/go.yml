@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        go-version: [1.17]
+        go-version: [1.17, 1.18]
         # See supported Go release schedule at https://golang.org/doc/devel/release.html
         #
     steps:
