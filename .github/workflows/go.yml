@@ -3,17 +3,20 @@ name: Go
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    #  branches: [ master ]
   pull_request:
-    branches: [ master ]
+    #  branches: [ master ]
 
 jobs:
-
   build:
+
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        go-version: [1.17, 1.18, 1.19, 1.20, 1.21]
+        go-version: [1.17]
+        # See supported Go release schedule at https://golang.org/doc/devel/release.html
+        #
     steps:
     - uses: actions/checkout@v2
 
