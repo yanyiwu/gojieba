@@ -1,4 +1,4 @@
-# GoJieba [English](README_EN.md)
+# GoJieba
 
 [![Go](https://github.com/yanyiwu/gojieba/actions/workflows/go.yml/badge.svg)](https://github.com/yanyiwu/gojieba/actions/workflows/go.yml)
 [![Author](https://img.shields.io/badge/author-@yanyiwu-blue.svg?style=flat)](http://yanyiwu.com/) 
@@ -152,10 +152,6 @@ go test -bench "Extractor" -test.benchtime 10s
 
 This project exists thanks to all the people who contribute.
 <a href="https://github.com/yanyiwu/gojieba/graphs/contributors"><img src="https://opencollective.com/gojieba/contributors.svg?width=890&button=false" /></a>
-
-## Contact
-
-+ Email: `i@yanyiwu.com`
 
 [CppJieba]:http://github.com/yanyiwu/cppjieba
 [GoJieba]:http://github.com/yanyiwu/gojieba
