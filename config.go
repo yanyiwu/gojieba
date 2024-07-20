@@ -15,7 +15,7 @@ var (
 )
 
 func init() {
-	DICT_DIR = path.Join(path.Dir(getCurrentFilePath()), "dict")
+	DICT_DIR = path.Join(path.Dir(getCurrentFilePath()), "deps/cppjieba/dict")
 	DICT_PATH = path.Join(DICT_DIR, "jieba.dict.utf8")
 	HMM_PATH = path.Join(DICT_DIR, "hmm_model.utf8")
 	USER_DICT_PATH = path.Join(DICT_DIR, "user.dict.utf8")
