@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Version
+## v1.4.0
 
 + [cppjieba] upgrade cppjieba to v5.1.2
 + [github/actions] go-version: ['1.17', '1.18', '1.19', '1.20', '1.21']
