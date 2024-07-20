@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.4.1
+
++ [limonp] removed deps/limonp
+
 ## v1.4.0
 
 + [cppjieba] upgrade cppjieba to v5.1.2
