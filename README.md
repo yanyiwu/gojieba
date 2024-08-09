@@ -126,6 +126,7 @@ func main() {
 Tokenize: [{长江 0 6} {大桥 6 12} {长江大桥 0 12}]
 ```
 
+See Details in [gojieba-demo](http://github.com/yanyiwu/gojieba-demo)
 See example in [jieba_test](jieba_test.go), [extractor_test](extractor_test.go)
 
 ## Benchmark
