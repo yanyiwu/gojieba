@@ -1,5 +1,46 @@
-# limonp ChangeLog
+# CHANGELOG
 
+## v0.9.0
+
++ [c++20] compatibility
++ [c++17] compatibility
+
+## v0.8.1
+
++ [CI] fix windows gtest thread link error
++ [submodule] rm test/googletest
++ [CMake] FetchContent googletest
++ [CMake] required 3.5 -> 3.14
+
+## v0.8.0
+
++ [StringUtil] Fix windows assert typo
++ [CMake] find_package(Threads REQUIRED); target_link_libraries(... Threads::Threads)
++ [CMAKE][CI] windows: 2019,2022
++ [CMAKE][CI] matrix.build_type[Release, Debug]
++ [unittest] disable #TMd5.cpp
++ [unittest] disable #TFileLock.cpp
++ [unittest] disable #TBoundedQueue.cpp 
++ [unittest] disable #TMutexLock.cpp 
++ [unittest] disable #TBlockingQueue.cpp 
++ [unittest] disable #TThread.cpp 
++ [unittest] disable #TThreadPool.cpp
+
+## v0.7.2
+
++ [CI] ubuntu version from 20 to 22, macos version from 12 to 14
++ [test/unittes] uint->size_t
++ [googletest] v1.6.0->v1.10.0
++ [CMake] version required 3.0 -> 3.5
+
+## v0.7.1
+
++ [CMake] fix CMAKE_CXX_STANDARD passed from github/actions and [c++11, c++14] only
+
+## v0.7.0
+
++ [CI] Added os.macos and cpp_version=[c++98, c++03, c++11, c++14, c++17, c++20]
++ [git submodule] Added googletest-release-v1.6.0
 
 ## v0.6.7
 

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.14)
 
 PROJECT(limonp
         LANGUAGES CXX)
@@ -7,9 +7,14 @@ PROJECT(limonp
 # cmake config #
 ################
 
-set(CMAKE_CXX_STANDARD 11 CACHE STRING "C++ Standard")
-set(CMAKE_CXX_STANDARD_REQUIRED ON CACHE BOOL "C++ Standard Requirement")
-set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "C++ Extensions")
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 11)
+endif()
+message(STATUS "CMAKE_CXX_STANDARD is ${CMAKE_CXX_STANDARD}")
+
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 
 ##############
 # dependency #
@@ -35,10 +40,12 @@ target_include_directories(${PROJECT_NAME}
 ENABLE_TESTING()
 
 ADD_SUBDIRECTORY(test)
-
-ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
 ADD_TEST(NAME ./test/demo COMMAND ./test/demo)
-ADD_TEST(NAME ./test/thread_pool_demo COMMAND ./test/thread_pool_demo)
+ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
+
+#if(NOT MSVC)
+#	ADD_TEST(NAME ./test/thread_pool_demo COMMAND ./test/thread_pool_demo)
+#endif()
 
 ###########
 # install #

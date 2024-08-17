@@ -1,4 +1,26 @@
-# CppJieba ChangeLog
+# CHANGELOG
+
+## v5.3.1
+
++ [cmake] fetch googletest
++ [submodules] rm test/googletest
+
+## v5.3.0
+
++ [c++17,c++20] compatibility
++ limonp version 0.6.7 -> 0.9.0
+
+## v5.2.0
+
++ [CI] windows-[2019,2022]
++ [googletest] v1.6.0->v1.10.0
++ [CI] ubuntu version from 20 to 22, macos version from 12 to 14
++ [CMake] mini_required 2.6->3.5 and fix CXX_VERSION variable passed from cmd
++ [CI] matrix and multi cpp version [11, 14]
+
+## v5.1.3
+
++ [googletest] git submodule add googletest-1.6.0
 
 ## v5.1.2
 
