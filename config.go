@@ -34,7 +34,9 @@ func getDictPaths(args ...string) [TOTAL_DICT_PATH_NUMBER]string {
 		STOP_WORDS_PATH,
 	}
 	for i := 0; i < len(args) && i < len(dicts); i++ {
-		dicts[i] = args[i]
+		if args[i] != "" {
+			dicts[i] = args[i]
+		}
 	}
 	return dicts
 }

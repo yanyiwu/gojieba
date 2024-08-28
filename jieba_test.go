@@ -191,6 +191,11 @@ func TestJiebaCutForSearch(t *testing.T) {
 	}
 }
 
+func TestNewJieba(t *testing.T) {
+	x := NewJieba("", "", "./deps/cppjieba/dict/user.dict.utf8", "", "")
+	defer x.Free()
+}
+
 func BenchmarkJieba(b *testing.B) {
 	//equals with x := NewJieba(DICT_PATH, HMM_PATH, USER_DICT_PATH)
 	x := NewJieba()
