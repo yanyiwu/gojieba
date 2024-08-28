@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.4.2
+
++ use default DICT_PATHs in config.go when args.path is empty str
++ [deps/cppjieba] v5.1.2 -> v5.3.1
++ README update demo url: gojieba-demo
+
 ## v1.4.1
 
 + [limonp] removed deps/limonp
