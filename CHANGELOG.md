@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.4.3
+
++ [compile] add flags: -std=c++11 to fix [issue-123](https://github.com/yanyiwu/gojieba/issues/123)
++ [github/actions] add macos os test
+
 ## v1.4.2
 
 + use default DICT_PATHs in config.go when args.path is empty str
