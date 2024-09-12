@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## *
+
++ [github/actions] go version using 1.20 at least
++ [go.mod] go 1.13->1.17
++ [github/actions] strategy: fail-fast: false
++ [github/actions] add windows os test and remove go-1.17,1.18,1.19
++ [github/actions] stale issues
+
 ## v1.4.3
 
 + [compile] add flags: -std=c++11 to fix [issue-123](https://github.com/yanyiwu/gojieba/issues/123)
