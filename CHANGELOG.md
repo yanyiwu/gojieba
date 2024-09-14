@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## *
+## v1.4.4
 
++ [NewJieba][cursor.ai-gen] check if the dictionary files exist
 + [github/actions] go version using 1.20 at least
 + [go.mod] go 1.13->1.17
 + [github/actions] strategy: fail-fast: false
