@@ -9,6 +9,8 @@ import "C"
 import (
 	"runtime"
 	"unsafe"
+	"os"
+	"fmt"
 )
 
 type TokenizeMode int
@@ -30,6 +32,14 @@ type Jieba struct {
 
 func NewJieba(paths ...string) *Jieba {
 	dictpaths := getDictPaths(paths...)
+	
+	// check if the dictionary files exist
+	for _, path := range dictpaths {
+		if _, err := os.Stat(path); os.IsNotExist(err) {
+			panic(fmt.Sprintf("Dictionary file does not exist: %s", path))
+		}
+	}
+
 	dpath, hpath, upath, ipath, spath := C.CString(dictpaths[0]), C.CString(dictpaths[1]), C.CString(dictpaths[2]), C.CString(dictpaths[3]), C.CString(dictpaths[4])
 	defer C.free(unsafe.Pointer(dpath))
 	defer C.free(unsafe.Pointer(hpath))
@@ -45,6 +55,7 @@ func NewJieba(paths ...string) *Jieba {
 			spath,
 		),
 	}
+	// set finalizer to free the memory when the object is garbage collected
 	runtime.SetFinalizer(jieba, (*Jieba).Free)
 	return jieba
 }
