@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## v1.0.0
+
++ rm thread pool demo
++ deleted:    include/limonp/BlockingQueue.hpp
++ deleted:    include/limonp/BoundedBlockingQueue.hpp
++ deleted:    include/limonp/BoundedQueue.hpp
++ deleted:    include/limonp/MutexLock.hpp
++ deleted:    include/limonp/Thread.hpp
++ deleted:    include/limonp/ThreadPool.hpp
++ deleted:    test/unittest/TBlockingQueue.cpp
++ deleted:    test/unittest/TBoundedQueue.cpp
++ deleted:    test/unittest/TMutexLock.cpp
++ deleted:    test/unittest/TThread.cpp
++ deleted:    test/unittest/TThreadPool.cpp
++ rm FileLock
++ rm Md5.hpp
+
 ## v0.9.0
 
 + [c++20] compatibility

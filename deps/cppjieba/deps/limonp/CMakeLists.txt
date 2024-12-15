@@ -43,10 +43,6 @@ ADD_SUBDIRECTORY(test)
 ADD_TEST(NAME ./test/demo COMMAND ./test/demo)
 ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
 
-#if(NOT MSVC)
-#	ADD_TEST(NAME ./test/thread_pool_demo COMMAND ./test/thread_pool_demo)
-#endif()
-
 ###########
 # install #
 ###########
