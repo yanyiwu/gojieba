@@ -9,7 +9,6 @@
 [![Coverage Status](https://coveralls.io/repos/yanyiwu/gojieba/badge.svg?branch=master&service=github)](https://coveralls.io/github/yanyiwu/gojieba?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/yanyiwu/gojieba)](https://goreportcard.com/report/yanyiwu/gojieba)
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/avelino/awesome-go) 
-[<img src="https://api.gitsponsors.com/api/badge/img?id=42340004" height="20">](https://api.gitsponsors.com/api/badge/link?p=lH9eBUG5K6XgoNUNwLg5xc+NmO7N4Hp+d2cuCaWpaqPry0KFHGNmPyNlrKarulCvbCk+JlLCL3Ees8ta/ZjFeAk+ZbXfR9LsiTAucnp3NtPDCPkVtox3qvYaJmjWBw56eypqLy2ss/bKTnEm954CEA==)
 
 [GoJieba]是"结巴"中文分词的Golang语言版本。
 
