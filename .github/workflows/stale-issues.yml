@@ -2,7 +2,8 @@ name: Close Stale Issues
 
 on:
   schedule:
-    - cron: '0 0 9 * *'  # Monthly on the 9th day of the month at midnight
+    - cron: '0 0 9 */3 *'  # Every three months on the 9th day of the month at midnight
+
 
 jobs:
   stale:
