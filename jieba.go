@@ -7,10 +7,11 @@ package gojieba
 */
 import "C"
 import (
-	"runtime"
-	"unsafe"
-	"os"
 	"fmt"
+	"os"
+	"runtime"
+	"sync/atomic"
+	"unsafe"
 )
 
 type TokenizeMode int
@@ -28,11 +29,12 @@ type Word struct {
 
 type Jieba struct {
 	jieba C.Jieba
+	freed int32
 }
 
 func NewJieba(paths ...string) *Jieba {
 	dictpaths := getDictPaths(paths...)
-	
+
 	// check if the dictionary files exist
 	for _, path := range dictpaths {
 		if _, err := os.Stat(path); os.IsNotExist(err) {
@@ -54,6 +56,7 @@ func NewJieba(paths ...string) *Jieba {
 			ipath,
 			spath,
 		),
+		0,
 	}
 	// set finalizer to free the memory when the object is garbage collected
 	runtime.SetFinalizer(jieba, (*Jieba).Free)
@@ -61,7 +64,9 @@ func NewJieba(paths ...string) *Jieba {
 }
 
 func (x *Jieba) Free() {
-	C.FreeJieba(x.jieba)
+	if atomic.CompareAndSwapInt32(&x.freed, 0, 1) { // only free once
+		C.FreeJieba(x.jieba)
+	}
 }
 
 func (x *Jieba) Cut(s string, hmm bool) []string {
