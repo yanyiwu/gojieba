@@ -3,6 +3,7 @@ package gojieba
 import (
 	"fmt"
 	"reflect"
+	"runtime"
 	"strings"
 	"testing"
 )
@@ -266,4 +267,11 @@ func BenchmarkExtractor(b *testing.B) {
 		x.Extract(s, 10)
 		x.ExtractWithWeight(s, 10)
 	}
+}
+
+func TestTypicalDoubleFree(t *testing.T) {
+	x := NewJieba()
+	defer x.Free()
+
+	runtime.GC() // call GC to run finalizers
 }
