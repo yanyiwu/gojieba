@@ -76,9 +76,9 @@ func (x *Jieba) FreeWithTrim() {
 	x.Free()
 }
 
+// Deprecated: WithTrim is no longer necessary; Free() now calls Trim()
+// automatically on Linux. Calling this method is a no-op.
 func (x *Jieba) WithTrim() *Jieba {
-	runtime.SetFinalizer(x, nil)
-	runtime.SetFinalizer(x, (*Jieba).FreeWithTrim)
 	return x
 }
 
