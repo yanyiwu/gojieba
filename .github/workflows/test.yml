@@ -23,10 +23,10 @@ jobs:
         # See supported Go release schedule at https://golang.org/doc/devel/release.html
         # https://github.com/actions/go-versions/blob/main/versions-manifest.json
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Set up Go ${{ matrix.go-version }}
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ matrix.go-version }}
 

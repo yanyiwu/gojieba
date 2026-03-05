@@ -13,6 +13,12 @@ import (
 	"runtime"
 	"sync/atomic"
 	"unsafe"
+
+	// These blank imports ensure `go mod vendor` copies the C++ header files
+	// from deps/cppjieba and deps/limonp into the vendor directory, so that
+	// CGo builds work correctly when using `go mod vendor`.
+	_ "github.com/yanyiwu/gojieba/deps/cppjieba/include/cppjieba"
+	_ "github.com/yanyiwu/gojieba/deps/cppjieba/deps/limonp/include/limonp"
 )
 
 type TokenizeMode int
