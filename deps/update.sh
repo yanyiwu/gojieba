@@ -10,6 +10,5 @@ git clone --recurse-submodules --branch $1 --single-branch https://github.com/ya
 # a plain directory tree with no submodule references.
 find cppjieba -name ".git" -exec rm -rf {} + 2>/dev/null || true
 find cppjieba -name ".gitmodules" -exec rm -f {} + 2>/dev/null || true
-cd ..
-git add deps/cppjieba
+git add cppjieba
 
