@@ -275,3 +275,19 @@ func TestTypicalDoubleFree(t *testing.T) {
 
 	runtime.GC() // call GC to run finalizers
 }
+
+// TestRepeatedNewAndFree verifies that creating and freeing Jieba multiple
+// times does not crash. On Linux with glibc, Free() calls malloc_trim(0) to
+// return freed C heap pages back to the OS; on other platforms Trim() is a
+// no-op and the test still validates correct behaviour across cycles.
+func TestRepeatedNewAndFree(t *testing.T) {
+	for i := 0; i < 3; i++ {
+		x := NewJieba()
+		words := x.Cut("我来到北京清华大学", true)
+		if len(words) == 0 {
+			t.Error("expected non-empty cut result")
+		}
+		x.Free()
+	}
+	runtime.GC()
+}

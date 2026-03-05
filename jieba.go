@@ -67,12 +67,13 @@ func NewJieba(paths ...string) *Jieba {
 func (x *Jieba) Free() {
 	if atomic.CompareAndSwapInt32(&x.freed, 0, 1) { // only free once
 		C.FreeJieba(x.jieba)
+		C.Trim()
 	}
 }
 
+// Deprecated: Use Free() instead. Free() now calls Trim() automatically.
 func (x *Jieba) FreeWithTrim() {
 	x.Free()
-	C.Trim()
 }
 
 func (x *Jieba) WithTrim() *Jieba {
