@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.4.5
+
++ [Free] Fix double-free crash: `Free()` now uses an atomic guard so that
+  calling it explicitly while a GC finalizer is also pending does not crash.
++ [NewJieba] Fix memory leak: `NewJieba` sets a `runtime.SetFinalizer` so C++
+  heap memory is released even when the caller never calls `Free()`.
++ [WithTrim] Deprecated `WithTrim()` — it is now a no-op because `Free()`
+  already calls `Trim()` (i.e. `malloc_trim` on Linux) automatically.
+
 ## v1.4.4
 
 + [NewJieba][cursor.ai-gen] check if the dictionary files exist
