@@ -27,6 +27,8 @@ go get github.com/yanyiwu/gojieba
 
 `gojieba` 依赖 cgo 和 C++。如果是交叉编译，请确保目标平台的 C/C++ 交叉工具链已经安装，并显式开启 cgo；`CGO_ENABLED=0` 的纯 Go 交叉编译方式不适用于这个库。
 
+`gojieba` requires cgo and C++; cross-compilation needs `CGO_ENABLED=1` plus a target C/C++ toolchain via `CC`/`CXX`.
+
 例如，交叉编译到 Linux amd64 时，需要类似下面这样提供目标平台工具链:
 
 ```bash
