@@ -17,6 +17,7 @@
 + 支持多种分词方式，包括: 最大概率模式, HMM新词发现模式, 搜索引擎模式, 全模式
 + 核心算法底层由C++实现，性能高效。
 + 字典路径可配置，NewJieba(...string), NewExtractor(...string) 可变形参，当参数为空时使用默认词典(推荐方式)
++ C++ 依赖 ([CppJieba] 及其 [limonp] 库) 已直接打包在 `deps/` 目录中，无需任何 git submodule 初始化，`go get` / `go mod vendor` 开箱即用。
 
 ## 用法
 
@@ -156,4 +157,5 @@ This project exists thanks to all the people who contribute.
 [CppJieba]:http://github.com/yanyiwu/cppjieba
 [GoJieba]:http://github.com/yanyiwu/gojieba
 [Jieba]:https://github.com/fxsjy/jieba
+[limonp]:https://github.com/yanyiwu/limonp
 [Jieba中文分词系列性能评测]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
