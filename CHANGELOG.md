@@ -1,13 +1,25 @@
 # CHANGELOG
 
+## v1.4.7
+
++ [memory] optimize memory usage
++ [Free] call `malloc_trim` on Linux so released C heap memory can be returned
+  to the OS
++ [Free] fix double-free crash: `Free()` now uses an atomic guard so that
+  calling it explicitly while a GC finalizer is also pending does not crash.
++ [NewJieba] fix memory leak: `NewJieba` sets a `runtime.SetFinalizer` so C++
+  heap memory is released even when the caller never calls `Free()`.
++ [WithTrim] deprecated `WithTrim()` — it is now a no-op because `Free()`
+  already calls `Trim()` (i.e. `malloc_trim` on Linux) automatically.
+
+## v1.4.6
+
++ [Free] 修复内存释放问题
+
 ## v1.4.5
 
-+ [Free] Fix double-free crash: `Free()` now uses an atomic guard so that
-  calling it explicitly while a GC finalizer is also pending does not crash.
-+ [NewJieba] Fix memory leak: `NewJieba` sets a `runtime.SetFinalizer` so C++
-  heap memory is released even when the caller never calls `Free()`.
-+ [WithTrim] Deprecated `WithTrim()` — it is now a no-op because `Free()`
-  already calls `Trim()` (i.e. `malloc_trim` on Linux) automatically.
++ maintenance release; see the full compare:
+  [v1.4.4...v1.4.5](https://github.com/yanyiwu/gojieba/compare/v1.4.4...v1.4.5)
 
 ## v1.4.4
 
