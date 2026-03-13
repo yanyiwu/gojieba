@@ -8,7 +8,7 @@ import (
 
 func TestGetCurrentFilePath(t *testing.T) {
 	got := getCurrentFilePath()
-	want := filepath.Join("config_test.go")
+	want := "config_test.go"
 
 	if filepath.Base(got) != want {
 		t.Fatalf("expected current file path to end with %q, got %q", want, got)
