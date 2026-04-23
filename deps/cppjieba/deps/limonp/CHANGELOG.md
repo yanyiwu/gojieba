@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v1.0.2
+
++ [fix][Logging] Avoid release-mode unused variable warning while keeping `tmNow` initialization path intact
++ [CI] Remove `macos-13` from CMake matrix to prevent long queued jobs
++ [CI] Upgrade `actions/checkout` from `v4` to `v5`
+
+## v1.0.1
+
++ [CI] Update GitHub Actions configurations
+  - Add stale issues workflow
+  - Update checkout action from v2 to v4
+  - Update macOS test environments (remove macOS-12, add macOS-15)
++ [dep] Update googletest to release-1.12.1
++ [doc] Add build instructions to README.md
+
 ## v1.0.0
 
 + rm thread pool demo

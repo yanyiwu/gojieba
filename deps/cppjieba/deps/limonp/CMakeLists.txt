@@ -36,12 +36,15 @@ target_include_directories(${PROJECT_NAME}
 ########
 # test #
 ########
+option(ENABLE_UNIT_TESTS "Enable building unit tests" ON)
 
-ENABLE_TESTING()
+if(ENABLE_UNIT_TESTS)
+        ENABLE_TESTING()
 
-ADD_SUBDIRECTORY(test)
-ADD_TEST(NAME ./test/demo COMMAND ./test/demo)
-ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
+        ADD_SUBDIRECTORY(test)
+        ADD_TEST(NAME ./test/demo COMMAND ./test/demo)
+        ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
+endif()
 
 ###########
 # install #
@@ -53,7 +56,7 @@ install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME})
 
 install(EXPORT ${PROJECT_NAME}
-        DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/cmake/
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}/
         NAMESPACE ${PROJECT_NAME}::
         FILE ${PROJECT_NAME}-config.cmake)
 

@@ -17,19 +17,18 @@ jobs:
     strategy:
       matrix:
         os: [
-          ubuntu-20.04, 
           ubuntu-22.04, 
-          macos-12,
-          macos-13,
+          ubuntu-latest,
           macos-14,
-          windows-2019,
+          macos-15,
           windows-2022,
+          windows-latest,
         ]  
         cpp_version: [11, 14, 17, 20]
         build_type: [Release, Debug]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v5
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=${{matrix.cpp_version}} -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
@@ -40,4 +39,3 @@ jobs:
     - name: Test
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{matrix.build_type}} --output-on-failure --verbose
-
