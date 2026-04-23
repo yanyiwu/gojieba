@@ -16,6 +16,16 @@
 
 **`no linking , no hurts`** 
 
+## Build
+
+```
+mkdir build
+cmake ..
+make
+
+make test
+```
+
 ## Example
 
 See Details in `test/demo.cpp`
@@ -23,11 +33,6 @@ See Details in `test/demo.cpp`
 ## Cases
 
 1. [CppJieba]
-
-## Reference
-
-1.  `md5.hpp` is copied from network, you can find original author in source code(in comments).
-2.  `MutexLock.hpp`, `BlockingQueue.hpp`, `Condition.hpp` reference from [muduo].
 
 ## Contact
 

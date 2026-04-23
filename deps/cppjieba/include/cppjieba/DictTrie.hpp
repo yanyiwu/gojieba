@@ -1,23 +1,25 @@
 #ifndef CPPJIEBA_DICT_TRIE_HPP
 #define CPPJIEBA_DICT_TRIE_HPP
 
-#include <iostream>
+#include <algorithm>
 #include <fstream>
-#include <map>
-#include <string>
 #include <cstring>
 #include <cstdlib>
-#include <stdint.h>
 #include <cmath>
-#include <limits>
+#include <deque>
+#include <memory>
+#include <mutex>
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include "limonp/StringUtil.hpp"
 #include "limonp/Logging.hpp"
+#include "UnicodeFile.hpp"
 #include "Unicode.hpp"
 #include "Trie.hpp"
 
 namespace cppjieba {
-
-using namespace limonp;
 
 const double MIN_DOUBLE = -3.14e+100;
 const double MAX_DOUBLE = 3.14e+100;
@@ -32,7 +34,7 @@ class DictTrie {
     WordWeightMax,
   }; // enum UserWordWeightOption
 
-  DictTrie(const string& dict_path, const string& user_dict_paths = "", UserWordWeightOption user_word_weight_opt = WordWeightMedian) {
+  DictTrie(const std::string& dict_path, const std::string& user_dict_paths = "", UserWordWeightOption user_word_weight_opt = WordWeightMedian) {
     Init(dict_path, user_dict_paths, user_word_weight_opt);
   }
 
@@ -40,7 +42,7 @@ class DictTrie {
     delete trie_;
   }
 
-  bool InsertUserWord(const string& word, const string& tag = UNKNOWN_TAG) {
+  bool InsertUserWord(const std::string& word, const std::string& tag = UNKNOWN_TAG) {
     DictUnit node_info;
     if (!MakeNodeInfo(node_info, word, user_word_default_weight_, tag)) {
       return false;
@@ -50,7 +52,7 @@ class DictTrie {
     return true;
   }
 
-  bool InsertUserWord(const string& word,int freq, const string& tag = UNKNOWN_TAG) {
+  bool InsertUserWord(const std::string& word,int freq, const std::string& tag = UNKNOWN_TAG) {
     DictUnit node_info;
     double weight = freq ? log(1.0 * freq / freq_sum_) : user_word_default_weight_ ;
     if (!MakeNodeInfo(node_info, word, weight , tag)) {
@@ -61,7 +63,7 @@ class DictTrie {
     return true;
   }
 
-  bool DeleteUserWord(const string& word, const string& tag = UNKNOWN_TAG) {
+  bool DeleteUserWord(const std::string& word, const std::string& tag = UNKNOWN_TAG) {
     DictUnit node_info;
     if (!MakeNodeInfo(node_info, word, user_word_default_weight_, tag)) {
       return false;
@@ -69,19 +71,19 @@ class DictTrie {
     trie_->DeleteNode(node_info.word, &node_info);
     return true;
   }
-  
+
   const DictUnit* Find(RuneStrArray::const_iterator begin, RuneStrArray::const_iterator end) const {
     return trie_->Find(begin, end);
   }
 
-  void Find(RuneStrArray::const_iterator begin, 
-        RuneStrArray::const_iterator end, 
-        vector<struct Dag>&res,
+  void Find(RuneStrArray::const_iterator begin,
+        RuneStrArray::const_iterator end,
+        std::vector<struct Dag>&res,
         size_t max_word_len = MAX_WORD_LENGTH) const {
     trie_->Find(begin, end, res, max_word_len);
   }
 
-  bool Find(const string& word)
+  bool Find(const std::string& word)
   {
     const DictUnit *tmp = NULL;
     RuneStrArray runes;
@@ -108,18 +110,18 @@ class DictTrie {
     return min_weight_;
   }
 
-  void InserUserDictNode(const string& line) {
-    vector<string> buf;
+  void InserUserDictNode(const std::string& line) {
+    std::vector<std::string> buf;
     DictUnit node_info;
-    Split(line, buf, " ");
+    limonp::Split(line, buf, " ");
     if(buf.size() == 1){
-          MakeNodeInfo(node_info, 
-                buf[0], 
+          MakeNodeInfo(node_info,
+                buf[0],
                 user_word_default_weight_,
                 UNKNOWN_TAG);
         } else if (buf.size() == 2) {
-          MakeNodeInfo(node_info, 
-                buf[0], 
+          MakeNodeInfo(node_info,
+                buf[0],
                 user_word_default_weight_,
                 buf[1]);
         } else if (buf.size() == 3) {
@@ -133,27 +135,28 @@ class DictTrie {
           user_dict_single_chinese_word_.insert(node_info.word[0]);
         }
   }
-  
-  void LoadUserDict(const vector<string>& buf) {
+
+  void LoadUserDict(const std::vector<std::string>& buf) {
     for (size_t i = 0; i < buf.size(); i++) {
       InserUserDictNode(buf[i]);
     }
   }
 
-   void LoadUserDict(const set<string>& buf) {
-    std::set<string>::const_iterator iter;
+   void LoadUserDict(const std::set<std::string>& buf) {
+    std::set<std::string>::const_iterator iter;
     for (iter = buf.begin(); iter != buf.end(); iter++){
       InserUserDictNode(*iter);
     }
   }
 
-  void LoadUserDict(const string& filePaths) {
-    vector<string> files = limonp::Split(filePaths, "|;");
+  void LoadUserDict(const std::string& filePaths) {
+    std::vector<std::string> files = limonp::Split(filePaths, "|;");
     for (size_t i = 0; i < files.size(); i++) {
-      ifstream ifs(files[i].c_str());
-      XCHECK(ifs.is_open()) << "open " << files[i] << " failed"; 
-      string line;
-      
+      std::ifstream ifs;
+      OpenInputFile(ifs, files[i]);
+      XCHECK(ifs.is_open()) << "open " << files[i] << " failed";
+      std::string line;
+
       while(getline(ifs, line)) {
         if (line.size() == 0) {
           continue;
@@ -165,38 +168,64 @@ class DictTrie {
 
 
  private:
-  void Init(const string& dict_path, const string& user_dict_paths, UserWordWeightOption user_word_weight_opt) {
-    LoadDict(dict_path);
-    freq_sum_ = CalcFreqSum(static_node_infos_);
-    CalculateWeight(static_node_infos_, freq_sum_);
-    SetStaticWordWeights(user_word_weight_opt);
+  struct DictCacheEntry {
+    std::shared_ptr<const std::vector<DictUnit> > node_infos;
+    double freq_sum;
+    double min_weight;
+    double max_weight;
+    double median_weight;
+  };
+
+  void Init(const std::string& dict_path, const std::string& user_dict_paths, UserWordWeightOption user_word_weight_opt) {
+    const DictCacheEntry& cache = GetDictCache(dict_path);
+    base_static_node_infos_ = cache.node_infos;
+    freq_sum_ = cache.freq_sum;
+    min_weight_ = cache.min_weight;
+    max_weight_ = cache.max_weight;
+    median_weight_ = cache.median_weight;
+    switch (user_word_weight_opt) {
+      case WordWeightMin:
+        user_word_default_weight_ = min_weight_;
+        break;
+      case WordWeightMedian:
+        user_word_default_weight_ = median_weight_;
+        break;
+      default:
+        user_word_default_weight_ = max_weight_;
+        break;
+    }
 
     if (user_dict_paths.size()) {
       LoadUserDict(user_dict_paths);
     }
     Shrink(static_node_infos_);
-    CreateTrie(static_node_infos_);
+    CreateTrie();
   }
-  
-  void CreateTrie(const vector<DictUnit>& dictUnits) {
-    assert(dictUnits.size());
-    vector<Unicode> words;
-    vector<const DictUnit*> valuePointers;
-    for (size_t i = 0 ; i < dictUnits.size(); i ++) {
-      words.push_back(dictUnits[i].word);
-      valuePointers.push_back(&dictUnits[i]);
+
+  void CreateTrie() {
+    const size_t total_size = base_static_node_infos_->size() + static_node_infos_.size();
+    assert(total_size);
+    std::vector<Unicode> words;
+    std::vector<const DictUnit*> valuePointers;
+    words.reserve(total_size);
+    valuePointers.reserve(total_size);
+
+    for (size_t i = 0; i < base_static_node_infos_->size(); i++) {
+      words.push_back((*base_static_node_infos_)[i].word);
+      valuePointers.push_back(&(*base_static_node_infos_)[i]);
+    }
+    for (size_t i = 0; i < static_node_infos_.size(); i++) {
+      words.push_back(static_node_infos_[i].word);
+      valuePointers.push_back(&static_node_infos_[i]);
     }
 
     trie_ = new Trie(words, valuePointers);
   }
 
-  
-
-
   bool MakeNodeInfo(DictUnit& node_info,
-        const string& word, 
-        double weight, 
-        const string& tag) {
+        const std::string& word,
+        double weight,
+        const std::string& tag) {
     if (!DecodeUTF8RunesInString(word, node_info.word)) {
       XLOG(ERROR) << "UTF-8 decode failed for dict word: " << word;
       return false;
@@ -206,49 +235,56 @@ class DictTrie {
     return true;
   }
 
-  void LoadDict(const string& filePath) {
-    ifstream ifs(filePath.c_str());
+  static DictCacheEntry BuildDictCacheEntry(const std::string& filePath) {
+    DictCacheEntry entry;
+    std::vector<DictUnit> node_infos;
+    std::ifstream ifs;
+    OpenInputFile(ifs, filePath);
     XCHECK(ifs.is_open()) << "open " << filePath << " failed.";
-    string line;
-    vector<string> buf;
-
-    DictUnit node_info;
+    std::string line;
+    std::vector<std::string> buf;
     while (getline(ifs, line)) {
-      Split(line, buf, " ");
+      limonp::Split(line, buf, " ");
       XCHECK(buf.size() == DICT_COLUMN_NUM) << "split result illegal, line:" << line;
-      MakeNodeInfo(node_info, 
-            buf[0], 
-            atof(buf[1].c_str()), 
-            buf[2]);
-      static_node_infos_.push_back(node_info);
+      DictUnit node_info;
+      XCHECK(DecodeUTF8RunesInString(buf[0], node_info.word)) << "UTF-8 decode failed for dict word: " << buf[0];
+      node_info.weight = atof(buf[1].c_str());
+      node_info.tag = buf[2];
+      node_infos.push_back(node_info);
     }
+    XCHECK(!node_infos.empty()) << "dict file is empty: " << filePath;
+
+    entry.freq_sum = CalcFreqSum(node_infos);
+    CalculateWeight(node_infos, entry.freq_sum);
+    std::vector<DictUnit> sorted = node_infos;
+    std::sort(sorted.begin(), sorted.end(), WeightCompare);
+    entry.min_weight = sorted.front().weight;
+    entry.max_weight = sorted.back().weight;
+    entry.median_weight = sorted[sorted.size() / 2].weight;
+
+    entry.node_infos = std::shared_ptr<const std::vector<DictUnit> >(new std::vector<DictUnit>(node_infos));
+    return entry;
+  }
+
+  static const DictCacheEntry& GetDictCache(const std::string& filePath) {
+    static std::unordered_map<std::string, DictCacheEntry> cache;
+    static std::mutex cache_mutex;
+    std::lock_guard<std::mutex> lock(cache_mutex);
+    std::unordered_map<std::string, DictCacheEntry>::const_iterator it = cache.find(filePath);
+    if (it != cache.end()) {
+      return it->second;
+    }
+    DictCacheEntry entry = BuildDictCacheEntry(filePath);
+    std::pair<std::unordered_map<std::string, DictCacheEntry>::iterator, bool> result =
+      cache.insert(std::make_pair(filePath, entry));
+    return result.first->second;
   }
 
   static bool WeightCompare(const DictUnit& lhs, const DictUnit& rhs) {
     return lhs.weight < rhs.weight;
   }
 
-  void SetStaticWordWeights(UserWordWeightOption option) {
-    XCHECK(!static_node_infos_.empty());
-    vector<DictUnit> x = static_node_infos_;
-    sort(x.begin(), x.end(), WeightCompare);
-    min_weight_ = x[0].weight;
-    max_weight_ = x[x.size() - 1].weight;
-    median_weight_ = x[x.size() / 2].weight;
-    switch (option) {
-     case WordWeightMin:
-       user_word_default_weight_ = min_weight_;
-       break;
-     case WordWeightMedian:
-       user_word_default_weight_ = median_weight_;
-       break;
-     default:
-       user_word_default_weight_ = max_weight_;
-       break;
-    }
-  }
-
-  double CalcFreqSum(const vector<DictUnit>& node_infos) const {
+  static double CalcFreqSum(const std::vector<DictUnit>& node_infos) {
     double sum = 0.0;
     for (size_t i = 0; i < node_infos.size(); i++) {
       sum += node_infos[i].weight;
@@ -256,7 +292,7 @@ class DictTrie {
     return sum;
   }
 
-  void CalculateWeight(vector<DictUnit>& node_infos, double sum) const {
+  static void CalculateWeight(std::vector<DictUnit>& node_infos, double sum) {
     assert(sum > 0.0);
     for (size_t i = 0; i < node_infos.size(); i++) {
       DictUnit& node_info = node_infos[i];
@@ -265,12 +301,13 @@ class DictTrie {
     }
   }
 
-  void Shrink(vector<DictUnit>& units) const {
-    vector<DictUnit>(units.begin(), units.end()).swap(units);
+  void Shrink(std::vector<DictUnit>& units) const {
+    std::vector<DictUnit>(units.begin(), units.end()).swap(units);
   }
 
-  vector<DictUnit> static_node_infos_;
-  deque<DictUnit> active_node_infos_; // must not be vector
+  std::shared_ptr<const std::vector<DictUnit> > base_static_node_infos_;
+  std::vector<DictUnit> static_node_infos_;
+  std::deque<DictUnit> active_node_infos_; // must not be std::vector
   Trie * trie_;
 
   double freq_sum_;
@@ -278,7 +315,7 @@ class DictTrie {
   double max_weight_;
   double median_weight_;
   double user_word_default_weight_;
-  unordered_set<Rune> user_dict_single_chinese_word_;
+  std::unordered_set<Rune> user_dict_single_chinese_word_;
 };
 }
 
