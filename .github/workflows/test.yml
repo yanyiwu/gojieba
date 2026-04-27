@@ -30,7 +30,7 @@ jobs:
         # See supported Go release schedule at https://go.dev/doc/devel/release
         # https://github.com/actions/go-versions/blob/main/versions-manifest.json
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Set up Go ${{ matrix.go-version }}
       uses: actions/setup-go@v6
