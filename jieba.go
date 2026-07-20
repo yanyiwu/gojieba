@@ -1,7 +1,7 @@
 package gojieba
 
 /*
-#cgo CXXFLAGS: -I./deps/cppjieba/include -I./deps/cppjieba/deps/limonp/include -DLOGGING_LEVEL=LL_WARNING -O3 -Wno-deprecated -Wno-unused-variable -std=c++11
+#cgo CXXFLAGS: -I./deps/cppjieba/include -DLOGGING_LEVEL=LL_WARNING -O3 -Wno-deprecated -Wno-unused-variable -std=c++11
 #include <stdlib.h>
 #include "jieba.h"
 */
@@ -15,12 +15,11 @@ import (
 	"unsafe"
 
 	// These blank imports ensure `go mod vendor` copies the C++ header files
-	// from deps/cppjieba and deps/limonp into the vendor directory, so that
+	// from deps/cppjieba into the vendor directory, so that
 	// CGo builds work correctly when using `go mod vendor`. They also ensure
 	// the dictionary data files are included in the vendor directory for the
 	// default dictionary paths to work at runtime.
 	_ "github.com/yanyiwu/gojieba/deps/cppjieba/include/cppjieba"
-	_ "github.com/yanyiwu/gojieba/deps/cppjieba/deps/limonp/include/limonp"
 	_ "github.com/yanyiwu/gojieba/deps/cppjieba/dict"
 	_ "github.com/yanyiwu/gojieba/deps/cppjieba/dict/pos_dict"
 )
